@@ -1,39 +1,64 @@
-import { useState } from 'react';
+import { ThemeProvider } from './context/ThemeContext';
+import { Navbar } from './components/layouts/Navbar';
+import { HeroSection } from './components/sections/HeroSection';
+import { AboutSection } from './components/sections/AboutSection';
+import { SkillsSection } from './components/sections/SkillsSection';
+import { ProjectsSection } from './components/sections/ProjectsSection';
+import { EducationSection } from './components/sections/EducationSection';
+import { ContactSection } from './components/sections/ContactSection';
+import { Footer } from './components/layouts/Footer';
+import { CustomCursor } from './components/CustomCursor';
 import { MouseSpotlight } from './components/MouseSpotlight';
-import { AeroplaneCursor } from './components/AeroplaneCursor';
-import { Header } from './components/Header';
-import { CountdownTimer } from './components/CountdownTimer';
-import { ContactModal } from './components/ContactModal';
-import { Footer } from './components/Footer';
+import { ScrollProgress } from './components/ScrollProgress';
 import './index.css';
 
-export function App() {
-  const [isContactOpen, setIsContactOpen] = useState(false);
-
+export function AppContent() {
   return (
-    <div style={{ position: 'relative', minHeight: '100vh', backgroundColor: 'var(--bg-primary)', cursor: 'default' }}>
-      {/* Ambient Mouse Spotlight Glow */}
+    <div
+      className="bg-tech-grid"
+      style={{
+        position: 'relative',
+        minHeight: '100vh',
+        backgroundColor: 'var(--bg-primary)',
+        transition: 'var(--transition-theme)'
+      }}
+    >
+      {/* Interactive Custom Ring Cursor */}
+      <CustomCursor />
+
+      {/* Top Scroll Progress Bar & Floating Indicator Bubble */}
+      <ScrollProgress />
+
+      {/* Interactive Mouse-following Backdrop Glow */}
       <MouseSpotlight />
-      <div className="ambient-glow-navy" />
 
-      {/* Interactive Aeroplane Cursor & Jet Contrail Stream */}
-      <AeroplaneCursor />
+      {/* Sticky Top Navbar */}
+      <Navbar />
 
-      {/* Main Container */}
-      <div style={{ position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-        <Header onOpenContact={() => setIsContactOpen(true)} />
+      {/* Main Single-Page Content */}
+      <main style={{ position: 'relative', zIndex: 2 }}>
+        <HeroSection />
+        <AboutSection />
+        <SkillsSection />
+        <ProjectsSection />
+        <EducationSection />
+        <ContactSection />
+      </main>
 
-        <main className="container" style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <CountdownTimer />
-        </main>
-
-        <Footer onOpenContact={() => setIsContactOpen(true)} />
-      </div>
-
-      {/* Quick Contact Modal */}
-      <ContactModal isOpen={isContactOpen} onClose={() => setIsContactOpen(false)} />
+      {/* Footer */}
+      <Footer />
     </div>
   );
 }
 
-export default App;
+import { LanguageProvider } from './context/LanguageContext';
+
+export default function App() {
+  return (
+    <ThemeProvider>
+      <LanguageProvider>
+        <AppContent />
+      </LanguageProvider>
+    </ThemeProvider>
+  );
+}
