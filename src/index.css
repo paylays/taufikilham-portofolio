@@ -1,0 +1,161 @@
+/* Bespoke Black, Midnight Navy & Crimson Red Design System */
+:root {
+  --bg-primary: #05070c;         /* Pure Obsidian Black */
+  --bg-navy: #0c1222;            /* Dark Midnight Navy */
+  --bg-card: rgba(12, 18, 34, 0.75); /* Navy Glass Panel */
+  --bg-card-hover: rgba(18, 27, 48, 0.9);
+
+  --color-crimson: #ff2a5f;      /* Electric Crimson Red */
+  --color-crimson-hover: #ff003c;
+  --color-crimson-glow: rgba(255, 42, 95, 0.35);
+  --color-navy-accent: #1d2b4f;
+
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --text-dim: #475569;
+
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-crimson: rgba(255, 42, 95, 0.3);
+
+  --font-heading: 'Space Grotesk', 'Syne', sans-serif;
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  min-height: 100vh;
+  background-color: var(--bg-primary);
+  color: var(--text-main);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--color-crimson);
+  color: #ffffff;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 42, 95, 0.3);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-crimson);
+}
+
+/* Subtle ambient backdrop */
+.ambient-glow-navy {
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 800px;
+  height: 500px;
+  background: radial-gradient(ellipse at center, rgba(12, 18, 34, 0.8) 0%, transparent 70%);
+  filter: blur(100px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Glass Panels */
+.glass-panel {
+  background: var(--bg-card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-subtle);
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+  transition: all 0.3s var(--ease-smooth);
+}
+
+.glass-panel-interactive:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--border-crimson);
+  box-shadow: 0 12px 40px rgba(255, 42, 95, 0.15);
+  transform: translateY(-2px);
+}
+
+/* Crimson Text Gradient */
+.text-gradient-crimson {
+  background: linear-gradient(135deg, #ffffff 0%, #ff6b8b 50%, var(--color-crimson) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Primary Crimson Button */
+.btn-crimson-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px 26px;
+  border-radius: 10px;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 0.92rem;
+  color: #ffffff;
+  background: linear-gradient(135deg, var(--color-crimson) 0%, #e11d48 100%);
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 0 20px rgba(255, 42, 95, 0.4);
+  transition: all 0.25s var(--ease-smooth);
+}
+
+.btn-crimson-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 30px rgba(255, 42, 95, 0.65);
+}
+
+.btn-crimson-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: 0.9rem;
+  color: var(--text-main);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-subtle);
+  cursor: pointer;
+  transition: all 0.25s var(--ease-smooth);
+}
+
+.btn-crimson-secondary:hover {
+  background: rgba(255, 42, 95, 0.1);
+  border-color: rgba(255, 42, 95, 0.3);
+  transform: translateY(-2px);
+}
+
+/* Container */
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 1rem;
+  }
+}
