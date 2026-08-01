@@ -67,13 +67,19 @@ export const Navbar: React.FC = () => {
         left: 0,
         right: 0,
         width: "100%",
+        height: "72px",
         zIndex: 1000,
-        backgroundColor: isScrolled ? "var(--nav-bg)" : "transparent",
-        backdropFilter: isScrolled ? "blur(12px)" : "none",
-        WebkitBackdropFilter: isScrolled ? "blur(12px)" : "none",
-        borderBottom: isScrolled
-          ? "1px solid var(--border-subtle)"
-          : "1px solid transparent",
+        transform: "translate3d(0, 0, 0)",
+        WebkitTransform: "translate3d(0, 0, 0)",
+        backgroundColor:
+          isScrolled || mobileMenuOpen ? "var(--nav-bg)" : "transparent",
+        backdropFilter: isScrolled || mobileMenuOpen ? "blur(12px)" : "none",
+        WebkitBackdropFilter:
+          isScrolled || mobileMenuOpen ? "blur(12px)" : "none",
+        borderBottom:
+          isScrolled || mobileMenuOpen
+            ? "1px solid var(--border-subtle)"
+            : "1px solid transparent",
         transition:
           "background-color 0.3s ease, backdrop-filter 0.3s ease, border-color 0.3s ease",
       }}
@@ -84,7 +90,7 @@ export const Navbar: React.FC = () => {
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          height: "72px",
+          height: "100%",
         }}
       >
         {/* Brand Logo */}
@@ -249,13 +255,16 @@ export const Navbar: React.FC = () => {
       {mobileMenuOpen && (
         <div
           style={{
-            backgroundColor: "var(--bg-card)",
+            backgroundColor: "var(--nav-bg)",
+            backdropFilter: "blur(16px)",
+            WebkitBackdropFilter: "blur(16px)",
             borderBottom: "1px solid var(--border-subtle)",
             padding: "1.25rem 1.5rem",
             display: "flex",
             flexDirection: "column",
             gap: "1rem",
             animation: "fadeIn 0.2s ease",
+            boxShadow: "var(--shadow-lg)",
           }}
         >
           {navLinks.map((link) => (

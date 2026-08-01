@@ -18,12 +18,14 @@ export const CustomCursor: React.FC = () => {
       setPosition({ x: e.clientX, y: e.clientY });
 
       // Check if hovering over clickable/interactive elements
-      const target = e.target as HTMLElement | null;
-      if (target) {
+      const target = e.target as Element | null;
+      if (target && typeof target.closest === 'function') {
         const isInteractive = !!target.closest(
           'a, button, input, textarea, select, [role="button"], .glass-card, .btn-icon, .btn, [onClick]'
         );
         setIsHovered(isInteractive);
+      } else {
+        setIsHovered(false);
       }
     };
 
