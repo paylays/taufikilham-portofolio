@@ -28,7 +28,10 @@ const staggerStyle = (
 import { useLanguage } from "../../context/LanguageContext";
 import { TRANSLATIONS } from "../../data/translations";
 
+import { useLenis } from "lenis/react";
+
 export const HeroSection: React.FC = () => {
+  const lenis = useLenis();
   const {
     name,
     github,
@@ -47,6 +50,18 @@ export const HeroSection: React.FC = () => {
 
   // Hero section content always visible on page load — use CSS animation directly
   const visible = true;
+
+  const handleScrollToProjects = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    const targetEl = document.getElementById("projects");
+    if (targetEl) {
+      if (lenis) {
+        lenis.scrollTo(targetEl, { offset: -72 });
+      } else {
+        targetEl.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  };
 
   return (
     <section
@@ -175,7 +190,7 @@ export const HeroSection: React.FC = () => {
                 ...staggerStyle(visible, "slideUpFade", 440),
               }}
             >
-              <a href="#projects" className="btn btn-primary">
+              <a href="#projects" onClick={handleScrollToProjects} className="btn btn-primary">
                 {t.exploreBtn} <ArrowRight size={18} />
               </a>
               <a href={cvUrl} download className="btn btn-outline">

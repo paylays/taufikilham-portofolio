@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Sun, Moon, Menu, X, Send, Globe } from "lucide-react";
+import { useLenis } from "lenis/react";
 import { useTheme } from "../../context/ThemeContext";
 import { useLanguage } from "../../context/LanguageContext";
 import { TRANSLATIONS } from "../../data/translations";
@@ -7,6 +8,7 @@ import { TRANSLATIONS } from "../../data/translations";
 export const Navbar: React.FC = () => {
   const { theme, toggleTheme } = useTheme();
   const { language, toggleLanguage } = useLanguage();
+  const lenis = useLenis();
   const t = TRANSLATIONS[language].nav;
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -54,7 +56,11 @@ export const Navbar: React.FC = () => {
     const targetId = href.substring(1);
     const targetEl = document.getElementById(targetId);
     if (targetEl) {
-      targetEl.scrollIntoView({ behavior: "smooth" });
+      if (lenis) {
+        lenis.scrollTo(targetEl, { offset: -72 });
+      } else {
+        targetEl.scrollIntoView({ behavior: "smooth" });
+      }
     }
   };
 

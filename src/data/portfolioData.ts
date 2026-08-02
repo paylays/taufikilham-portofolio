@@ -1,7 +1,11 @@
+import intersiImg from '../assets/projects/Login - INTERSI.png';
+import rt36Img from '../assets/projects/Landing - Website Administrasi RT.36.png';
+import pariwisataImg from '../assets/projects/Explore More Pariwisata Balikpapan.png';
+import simtekImg from '../assets/projects/SIMTEK Dashboard.png';
+
 export interface Project {
   id: string;
   title: string;
-  category: "Backend" | "Fullstack" | "Frontend" | "Web Utility";
   shortDescription: string;
   fullDescription: string;
   problemStatement: string;
@@ -9,7 +13,7 @@ export interface Project {
   technicalChallenges: string[];
   techStack: string[];
   image: string;
-  demoUrl: string;
+  demoUrl?: string;
   githubUrl: string;
   featured?: boolean;
 }
@@ -148,7 +152,6 @@ export const PORTFOLIO_DATA = {
     {
       id: "proj-1",
       title: "INTERSI-ITK (Internship Sistem Informasi ITK)",
-      category: "Fullstack",
       shortDescription:
         "Sistem Informasi Manajemen Kerja Praktik & Magang Mahasiswa Sistem Informasi ITK.",
       fullDescription:
@@ -172,16 +175,14 @@ export const PORTFOLIO_DATA = {
         "Bootstrap / Tailwind",
         "RESTful API",
       ],
-      image:
-        "https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=800&auto=format&fit=crop",
-      demoUrl: "https://github.com/paylays",
-      githubUrl: "https://github.com/paylays",
+      image: intersiImg,
+      demoUrl: "https://intersi-itk.myst-tech.com",
+      githubUrl: "https://github.com/paylays/sim-kp",
       featured: true,
     },
     {
       id: "proj-2",
       title: "SI-RT (Sistem Informasi RT 36 Wonorejo)",
-      category: "Fullstack",
       shortDescription:
         "Sistem Pelayanan Digital Kependudukan dan Administrasi Keuangan RT 36 Wonorejo.",
       fullDescription:
@@ -198,16 +199,14 @@ export const PORTFOLIO_DATA = {
         "Menyediakan antarmuka yang sangat simpel agar ramah digunakan oleh warga dari berbagai kelompok usia",
       ],
       techStack: ["PHP", "Laravel", "MySQL", "Tailwind CSS", "JavaScript"],
-      image:
-        "https://images.unsplash.com/photo-1577495508048-b635879837f1?q=80&w=800&auto=format&fit=crop",
-      demoUrl: "https://github.com/paylays",
-      githubUrl: "https://github.com/paylays",
+      image: rt36Img,
+      demoUrl: "https://rt36-wonorejo.my.id",
+      githubUrl: "https://github.com/paylays/administrasi-rt",
       featured: true,
     },
     {
       id: "proj-3",
       title: "SITA-BPP (Sistem Informasi Pariwisata Kota Balikpapan)",
-      category: "Fullstack",
       shortDescription:
         "Portal Informasi Destinasi Wisata, Kuliner & Ekowisata Kota Balikpapan.",
       fullDescription:
@@ -230,16 +229,13 @@ export const PORTFOLIO_DATA = {
         "PostgreSQL",
         "Tailwind CSS",
       ],
-      image:
-        "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=800&auto=format&fit=crop",
-      demoUrl: "https://github.com/paylays",
-      githubUrl: "https://github.com/paylays",
+      image: pariwisataImg,
+      githubUrl: "https://github.com/paylays/sita-bpp",
       featured: false,
     },
     {
       id: "proj-4",
       title: "SIMTEK (Sistem Informasi Apotek)",
-      category: "Backend",
       shortDescription:
         "Sistem Manajemen Inventaris Obat, Transaksi Penjualan & Stok Gudang Apotek.",
       fullDescription:
@@ -262,10 +258,8 @@ export const PORTFOLIO_DATA = {
         "JavaScript",
         "Bootstrap",
       ],
-      image:
-        "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?q=80&w=800&auto=format&fit=crop",
-      demoUrl: "https://github.com/paylays",
-      githubUrl: "https://github.com/paylays",
+      image: simtekImg,
+      githubUrl: "https://github.com/paylays/simtek_fix",
       featured: false,
     },
   ] as Project[],

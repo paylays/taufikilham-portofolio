@@ -51,14 +51,17 @@ export function AppContent() {
   );
 }
 
+import { ReactLenis } from 'lenis/react';
 import { LanguageProvider } from './context/LanguageContext';
 
 export default function App() {
   return (
-    <ThemeProvider>
-      <LanguageProvider>
-        <AppContent />
-      </LanguageProvider>
-    </ThemeProvider>
+    <ReactLenis root options={{ lerp: 0.08, duration: 1.2, smoothWheel: true }}>
+      <ThemeProvider>
+        <LanguageProvider>
+          <AppContent />
+        </LanguageProvider>
+      </ThemeProvider>
+    </ReactLenis>
   );
 }

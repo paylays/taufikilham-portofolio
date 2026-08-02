@@ -13,30 +13,24 @@ export const ProjectsSection: React.FC = () => {
   const projects = PORTFOLIO_DATA.projects;
   const { language } = useLanguage();
   const t = TRANSLATIONS[language].projects;
-  const [activeCategory, setActiveCategory] = useState<string>('All');
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAutoplay, setIsAutoplay] = useState(true);
   const [viewMode, setViewMode] = useState<'slider' | 'grid'>('slider');
 
-  const categories = ['All', 'Backend', 'Fullstack', 'Frontend', 'Web Utility'];
-  const filteredProjects = activeCategory === 'All' ? projects : projects.filter(p => p.category === activeCategory);
-
   const { ref: headerRef, isVisible: headerVisible } = useScrollReveal({ threshold: 0.2 });
   const { ref: controlsRef, isVisible: controlsVisible } = useScrollReveal({ threshold: 0.1 });
   const { ref: contentRef, isVisible: contentVisible } = useScrollReveal({ threshold: 0.1 });
 
-  useEffect(() => { setCurrentIndex(0); }, [activeCategory]);
-
   useEffect(() => {
-    if (!isAutoplay || filteredProjects.length <= 1 || viewMode !== 'slider') return;
-    const interval = setInterval(() => setCurrentIndex(prev => (prev + 1) % filteredProjects.length), 4500);
+    if (!isAutoplay || projects.length <= 1 || viewMode !== 'slider') return;
+    const interval = setInterval(() => setCurrentIndex(prev => (prev + 1) % projects.length), 4500);
     return () => clearInterval(interval);
-  }, [isAutoplay, filteredProjects.length, viewMode]);
+  }, [isAutoplay, projects.length, viewMode]);
 
-  const handleNext = () => setCurrentIndex(prev => (prev + 1) % filteredProjects.length);
-  const handlePrev = () => setCurrentIndex(prev => (prev - 1 + filteredProjects.length) % filteredProjects.length);
-  const activeProject = filteredProjects[currentIndex] || filteredProjects[0];
+  const handleNext = () => setCurrentIndex(prev => (prev + 1) % projects.length);
+  const handlePrev = () => setCurrentIndex(prev => (prev - 1 + projects.length) % projects.length);
+  const activeProject = projects[currentIndex] || projects[0];
 
   return (
     <section
@@ -69,7 +63,7 @@ export const ProjectsSection: React.FC = () => {
           <div style={{ width: '50px', height: '4px', backgroundColor: 'var(--color-blue)', margin: '12px auto 0', borderRadius: '2px' }} />
         </div>
 
-        {/* Controls Bar — fade up with slight delay */}
+        {/* Controls Bar — View Mode & Navigation Arrows */}
         <div
           ref={controlsRef}
           className="projects-controls"
@@ -84,45 +78,28 @@ export const ProjectsSection: React.FC = () => {
             animation: controlsVisible ? 'slideUpFade 0.6s cubic-bezier(0.16,1,0.3,1) 0.1s both' : 'none'
           }}
         >
-          {/* Category Tabs */}
-          <div className="projects-category-tabs" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '6px', borderRadius: '16px', backgroundColor: 'var(--bg-card)', border: '1px solid var(--border-subtle)', boxShadow: 'var(--shadow-sm)', flexWrap: 'wrap' }}>
-            {categories.map(cat => {
-              const isActive = activeCategory === cat;
-              return (
-                <button
-                  key={cat}
-                  onClick={() => setActiveCategory(cat)}
-                  style={{ padding: '8px 18px', borderRadius: '12px', fontSize: '0.88rem', fontWeight: isActive ? 600 : 400, cursor: 'pointer', border: 'none', backgroundColor: isActive ? 'var(--color-blue)' : 'transparent', color: isActive ? '#ffffff' : 'var(--text-muted)', transition: 'all 0.25s cubic-bezier(0.16, 1, 0.3, 1)' }}
-                >
-                  {cat}
-                </button>
-              );
-            })}
+          {/* View Mode Toggle */}
+          <div style={{ display: 'inline-flex', alignItems: 'center', padding: '4px', borderRadius: '12px', backgroundColor: 'var(--bg-card)', border: '1px solid var(--border-subtle)', boxShadow: 'var(--shadow-sm)' }}>
+            <button onClick={() => setViewMode('slider')} title="Slider View" style={{ padding: '6px 14px', borderRadius: '8px', fontSize: '0.82rem', fontWeight: viewMode === 'slider' ? 600 : 400, border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px', backgroundColor: viewMode === 'slider' ? 'var(--color-blue)' : 'transparent', color: viewMode === 'slider' ? '#ffffff' : 'var(--text-muted)', transition: 'all 0.25s ease' }}>
+              <SlidersHorizontal size={14} /> Slider
+            </button>
+            <button onClick={() => setViewMode('grid')} title="Grid View" style={{ padding: '6px 14px', borderRadius: '8px', fontSize: '0.82rem', fontWeight: viewMode === 'grid' ? 600 : 400, border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px', backgroundColor: viewMode === 'grid' ? 'var(--color-blue)' : 'transparent', color: viewMode === 'grid' ? '#ffffff' : 'var(--text-muted)', transition: 'all 0.25s ease' }}>
+              <LayoutGrid size={14} /> Grid
+            </button>
           </div>
 
-          {/* View Mode Toggle + Slider Controls */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <div style={{ display: 'inline-flex', alignItems: 'center', padding: '4px', borderRadius: '12px', backgroundColor: 'var(--bg-card)', border: '1px solid var(--border-subtle)' }}>
-              <button onClick={() => setViewMode('slider')} title="Slider View" style={{ padding: '6px 12px', borderRadius: '8px', fontSize: '0.8rem', fontWeight: viewMode === 'slider' ? 600 : 400, border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px', backgroundColor: viewMode === 'slider' ? 'var(--color-blue)' : 'transparent', color: viewMode === 'slider' ? '#ffffff' : 'var(--text-muted)' }}>
-                <SlidersHorizontal size={14} /> Slider
+          {/* Slider Prev / Next Controls */}
+          {viewMode === 'slider' && (
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <button onClick={() => setIsAutoplay(!isAutoplay)} className="btn-icon" title={isAutoplay ? 'Pause' : 'Play'}>
+                {isAutoplay ? <Pause size={16} /> : <Play size={16} />}
               </button>
-              <button onClick={() => setViewMode('grid')} title="Grid View" style={{ padding: '6px 12px', borderRadius: '8px', fontSize: '0.8rem', fontWeight: viewMode === 'grid' ? 600 : 400, border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px', backgroundColor: viewMode === 'grid' ? 'var(--color-blue)' : 'transparent', color: viewMode === 'grid' ? '#ffffff' : 'var(--text-muted)' }}>
-                <LayoutGrid size={14} /> Grid
+              <button onClick={handlePrev} className="btn-icon" title="Previous Project"><ChevronLeft size={20} /></button>
+              <button onClick={handleNext} className="btn-icon" title="Next Project" style={{ backgroundColor: 'var(--color-blue)', color: '#ffffff', border: 'none' }}>
+                <ChevronRight size={20} />
               </button>
             </div>
-
-            {viewMode === 'slider' && (
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <button onClick={() => setIsAutoplay(!isAutoplay)} className="btn-icon" title={isAutoplay ? 'Pause' : 'Play'}>
-                  {isAutoplay ? <Pause size={16} /> : <Play size={16} />}
-                </button>
-                <button onClick={handlePrev} className="btn-icon"><ChevronLeft size={20} /></button>
-                <button onClick={handleNext} className="btn-icon" style={{ backgroundColor: 'var(--color-blue)', color: '#ffffff', border: 'none' }}>
-                  <ChevronRight size={20} />
-                </button>
-              </div>
-            )}
-          </div>
+          )}
         </div>
 
         {/* Content Area — slide up with delay */}
@@ -147,12 +124,8 @@ export const ProjectsSection: React.FC = () => {
                   alt={activeProject.title}
                   style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s ease' }}
                 />
-                <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 60%)' }} />
-                <div style={{ position: 'absolute', top: '16px', left: '16px', padding: '6px 14px', borderRadius: '20px', fontSize: '0.8rem', fontWeight: 600, backgroundColor: 'rgba(0,0,0,0.75)', backdropFilter: 'blur(8px)', color: '#ffffff' }}>
-                  {activeProject.category}
-                </div>
                 <div style={{ position: 'absolute', bottom: '16px', right: '16px', padding: '4px 12px', borderRadius: '12px', fontSize: '0.78rem', fontWeight: 500, backgroundColor: 'rgba(0,0,0,0.75)', color: '#ffffff' }}>
-                  {currentIndex + 1} / {filteredProjects.length}
+                  {currentIndex + 1} / {projects.length}
                 </div>
               </div>
 
@@ -170,7 +143,9 @@ export const ProjectsSection: React.FC = () => {
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', paddingTop: '1rem', borderTop: '1px solid var(--border-subtle)', flexWrap: 'wrap' }}>
                   <button onClick={() => setSelectedProject(activeProject)} className="btn btn-primary"><Info size={16} /> Details & Architecture</button>
-                  <a href={activeProject.demoUrl} target="_blank" rel="noreferrer" className="btn btn-outline"><ExternalLink size={16} /> Live Demo</a>
+                  {activeProject.demoUrl && (
+                    <a href={activeProject.demoUrl} target="_blank" rel="noreferrer" className="btn btn-outline"><ExternalLink size={16} /> Live Project</a>
+                  )}
                   <a href={activeProject.githubUrl} target="_blank" rel="noreferrer" className="btn-icon" title="GitHub Repo"><GithubIcon size={18} /></a>
                 </div>
               </div>
@@ -180,7 +155,7 @@ export const ProjectsSection: React.FC = () => {
           {/* Grid View */}
           {viewMode === 'grid' && (
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '2rem' }} className="projects-grid">
-              {filteredProjects.map((project, idx) => (
+              {projects.map((project, idx) => (
                 <div
                   key={project.id}
                   className="glass-card"
@@ -191,7 +166,6 @@ export const ProjectsSection: React.FC = () => {
                 >
                   <div className="img-zoom-wrap" style={{ position: 'relative', height: '220px', overflow: 'hidden' }}>
                     <img src={project.image} alt={project.title} style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.4s ease' }} />
-                    <div style={{ position: 'absolute', top: '14px', left: '14px', padding: '4px 12px', borderRadius: '20px', fontSize: '0.75rem', fontWeight: 600, backgroundColor: 'rgba(0,0,0,0.75)', color: '#ffffff' }}>{project.category}</div>
                   </div>
                   <div style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', flex: 1, gap: '1rem' }}>
                     <div>
@@ -208,8 +182,10 @@ export const ProjectsSection: React.FC = () => {
                         View Details &rarr;
                       </button>
                       <div style={{ display: 'flex', gap: '8px' }}>
-                        <a href={project.githubUrl} target="_blank" rel="noreferrer" className="btn-icon" style={{ width: '34px', height: '34px' }}><GithubIcon size={16} /></a>
-                        <a href={project.demoUrl} target="_blank" rel="noreferrer" className="btn-icon" style={{ width: '34px', height: '34px' }}><ExternalLink size={16} /></a>
+                        <a href={project.githubUrl} target="_blank" rel="noreferrer" className="btn-icon" style={{ width: '34px', height: '34px' }} title="GitHub Repo"><GithubIcon size={16} /></a>
+                        {project.demoUrl && (
+                          <a href={project.demoUrl} target="_blank" rel="noreferrer" className="btn-icon" style={{ width: '34px', height: '34px' }} title="Live Project"><ExternalLink size={16} /></a>
+                        )}
                       </div>
                     </div>
                   </div>
@@ -222,7 +198,7 @@ export const ProjectsSection: React.FC = () => {
         {/* Slide Dots */}
         {viewMode === 'slider' && (
           <div style={{ display: 'flex', justifyContent: 'center', gap: '8px', marginTop: '2rem' }}>
-            {filteredProjects.map((_, i) => (
+            {projects.map((_, i) => (
               <button
                 key={i}
                 onClick={() => setCurrentIndex(i)}
@@ -247,15 +223,7 @@ export const ProjectsSection: React.FC = () => {
         /* Mobile: controls wrap nicely */
         @media (max-width: 768px) {
           #projects { padding: 4rem 0 !important; }
-          .projects-controls { flex-direction: column !important; align-items: stretch !important; }
-          .projects-controls > div { width: 100% !important; }
-        }
-
-        /* Small mobile */
-        @media (max-width: 540px) {
-          .projects-category-tabs { flex-wrap: wrap !important; gap: 4px !important; }
-          .projects-category-tabs button { flex: 1 !important; min-width: 60px !important; padding: 8px 10px !important; }
-          .slider-content-grid { padding: 1.25rem !important; }
+          .projects-controls { flex-direction: row !important; align-items: center !important; justify-content: space-between !important; }
         }
 
         @media (max-width: 400px) {
