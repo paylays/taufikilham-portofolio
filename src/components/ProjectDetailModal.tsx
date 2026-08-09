@@ -60,11 +60,10 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
         className="glass-card"
         style={{
           width: "100%",
-          maxWidth: "780px",
+          maxWidth: "760px",
           maxHeight: "88vh",
           overflowY: "auto",
           backgroundColor: "var(--bg-card)",
-          borderRadius: "24px",
           position: "relative",
           padding: "0",
           boxShadow: "var(--shadow-lg)",
@@ -72,9 +71,9 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
         }}
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Header Cover Image & Close Button */}
+        {/* Header Cover Image & Sharp Close Button */}
         <div
-          style={{ position: "relative", height: "260px", overflow: "hidden" }}
+          style={{ position: "relative", height: "260px", overflow: "hidden", borderBottom: "1px solid var(--border-subtle)" }}
         >
           <img
             src={project.image}
@@ -86,35 +85,31 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
               position: "absolute",
               inset: 0,
               background:
-                "linear-gradient(to top, var(--bg-card) 0%, rgba(0,0,0,0.4) 60%, transparent 100%)",
+                "linear-gradient(to top, var(--bg-card) 0%, rgba(0,0,0,0.5) 60%, transparent 100%)",
             }}
           />
 
-          {/* Floating Close Button */}
+          {/* Sharp Close Button */}
           <button
             onClick={onClose}
             className="btn-icon"
             style={{
               position: "absolute",
-              top: "18px",
-              right: "18px",
-              backgroundColor: "rgba(15, 23, 42, 0.65)",
-              backdropFilter: "blur(10px)",
-              WebkitBackdropFilter: "blur(10px)",
-              color: "#ffffff",
-              border: "1px solid rgba(255, 255, 255, 0.15)",
-              borderRadius: "50%",
-              width: "38px",
-              height: "38px",
+              top: "16px",
+              right: "16px",
+              backgroundColor: "var(--bg-card)",
+              color: "var(--text-main)",
+              border: "1px solid var(--border-subtle)",
+              width: "36px",
+              height: "36px",
               cursor: "pointer",
-              transition: "transform 0.2s ease, background-color 0.2s ease",
             }}
             aria-label="Close Modal"
           >
             <X size={18} />
           </button>
 
-          {/* Title overlay in image cover */}
+          {/* Title Overlay in Image Cover */}
           <div
             style={{
               position: "absolute",
@@ -130,7 +125,7 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
                 color: "#ffffff",
                 fontFamily: "var(--font-heading)",
                 letterSpacing: "-0.01em",
-                textShadow: "0 2px 10px rgba(0,0,0,0.5)",
+                textShadow: "0 2px 10px rgba(0,0,0,0.6)",
               }}
             >
               {project.title}
@@ -138,7 +133,7 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
           </div>
         </div>
 
-        {/* Modal Main Body */}
+        {/* Modal Content Body */}
         <div
           style={{
             padding: "2rem 2.25rem 2.5rem",
@@ -147,7 +142,7 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
             gap: "2rem",
           }}
         >
-          {/* Tech Stack Chips Bar */}
+          {/* Tech Stack Sharp Pills Bar */}
           <div
             style={{
               display: "flex",
@@ -164,21 +159,21 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
                 textTransform: "uppercase",
                 letterSpacing: "0.08em",
                 marginRight: "4px",
+                fontFamily: "var(--font-mono)",
               }}
             >
-              Technologies:
+              TECH STACK:
             </span>
             {project.techStack.map((tech) => (
               <span
                 key={tech}
                 style={{
-                  padding: "5px 12px",
-                  borderRadius: "8px",
-                  fontSize: "0.8rem",
+                  padding: "4px 10px",
+                  fontSize: "0.78rem",
                   fontWeight: 500,
-                  backgroundColor: "var(--bg-surface)",
+                  backgroundColor: "var(--color-blue-glow)",
+                  color: "var(--color-blue)",
                   border: "1px solid var(--border-subtle)",
-                  color: "var(--text-main)",
                 }}
               >
                 {tech}
@@ -188,15 +183,16 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
 
           {/* Detailed Overview Paragraph */}
           <div
-            style={{ display: "flex", flexDirection: "column", gap: "0.6rem" }}
+            style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}
           >
             <h3
               style={{
-                fontSize: "0.82rem",
+                fontSize: "0.8rem",
                 fontWeight: 700,
                 color: "var(--color-blue)",
                 textTransform: "uppercase",
-                letterSpacing: "0.08em",
+                letterSpacing: "0.1em",
+                fontFamily: "var(--font-mono)",
               }}
             >
               Project Overview
@@ -213,16 +209,18 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
             </p>
           </div>
 
-          {/* Project Objective Card — Clean Bespoke Design */}
+          {/* Problem & Objective Card — Editorial Sharp Box */}
           <div
             style={{
-              padding: "1.35rem 1.6rem",
-              borderRadius: "16px",
+              padding: "1.25rem 1.5rem",
               backgroundColor: "var(--bg-surface)",
-              border: "1px solid var(--border-subtle)",
+              borderLeft: "3px solid var(--color-garnet)",
+              borderTop: "1px solid var(--border-subtle)",
+              borderRight: "1px solid var(--border-subtle)",
+              borderBottom: "1px solid var(--border-subtle)",
               display: "flex",
               flexDirection: "column",
-              gap: "0.6rem",
+              gap: "0.5rem",
             }}
           >
             <span
@@ -231,14 +229,15 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
                 fontWeight: 700,
                 color: "var(--color-garnet)",
                 textTransform: "uppercase",
-                letterSpacing: "0.08em",
+                letterSpacing: "0.1em",
+                fontFamily: "var(--font-mono)",
               }}
             >
               Problem & Objective
             </span>
             <p
               style={{
-                fontSize: "0.93rem",
+                fontSize: "0.92rem",
                 color: "var(--text-muted)",
                 lineHeight: 1.65,
                 fontWeight: 400,
@@ -269,7 +268,7 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
               style={{
                 display: "flex",
                 flexDirection: "column",
-                gap: "0.6rem",
+                gap: "0.5rem",
                 paddingLeft: "1.25rem",
                 margin: 0,
               }}
@@ -278,7 +277,7 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
                 <li
                   key={i}
                   style={{
-                    fontSize: "0.93rem",
+                    fontSize: "0.92rem",
                     color: "var(--text-main)",
                     lineHeight: 1.6,
                     fontWeight: 400,
@@ -318,7 +317,7 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
                 style={{
                   display: "flex",
                   flexDirection: "column",
-                  gap: "0.6rem",
+                  gap: "0.5rem",
                   paddingLeft: "1.25rem",
                   margin: 0,
                 }}
@@ -327,7 +326,7 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
                   <li
                     key={i}
                     style={{
-                      fontSize: "0.93rem",
+                      fontSize: "0.92rem",
                       color: "var(--text-muted)",
                       lineHeight: 1.6,
                       fontWeight: 400,

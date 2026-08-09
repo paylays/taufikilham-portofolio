@@ -1,6 +1,6 @@
 import { ThemeProvider } from './context/ThemeContext';
+import { Sidebar } from './components/layouts/Sidebar';
 import { Navbar } from './components/layouts/Navbar';
-import { HeroSection } from './components/sections/HeroSection';
 import { AboutSection } from './components/sections/AboutSection';
 import { SkillsSection } from './components/sections/SkillsSection';
 import { ProjectsSection } from './components/sections/ProjectsSection';
@@ -23,30 +23,28 @@ export function AppContent() {
         transition: 'var(--transition-theme)'
       }}
     >
-      {/* Interactive Custom Ring Cursor */}
       <CustomCursor />
-
-      {/* Top Scroll Progress Bar & Floating Indicator Bubble */}
       <ScrollProgress />
-
-      {/* Interactive Mouse-following Backdrop Glow */}
       <MouseSpotlight />
 
-      {/* Sticky Top Navbar */}
+      {/* Mobile-only top navbar */}
       <Navbar />
 
-      {/* Main Single-Page Content */}
-      <main style={{ position: 'relative', zIndex: 2 }}>
-        <HeroSection />
-        <AboutSection />
-        <SkillsSection />
-        <ProjectsSection />
-        <EducationSection />
-        <ContactSection />
-      </main>
+      {/* Split Layout */}
+      <div className="split-layout">
+        {/* Left Sidebar — sticky, desktop only */}
+        <Sidebar />
 
-      {/* Footer */}
-      <Footer />
+        {/* Right Scrollable Content */}
+        <main className="split-content" style={{ position: 'relative', zIndex: 2 }}>
+          <AboutSection />
+          <SkillsSection />
+          <ProjectsSection />
+          <EducationSection />
+          <ContactSection />
+          <Footer />
+        </main>
+      </div>
     </div>
   );
 }
