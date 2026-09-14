@@ -52,7 +52,7 @@ export const PORTFOLIO_DATA = {
     facebook:
       "https://www.facebook.com/profile.php?fb_profile_edit_entry_point=%7B%22click_point%22%3A%22edit_profile_button%22%2C%22feature%22%3A%22profile_header%22%7D&id=100080858852174&sk=about",
     twitter: "https://x.com/payylayss",
-    cvUrl: "/src/assets/CV ATS - Taufik Ilham.pdf",
+    cvUrl: "/src/assets/Taufik-Ilham-CV.pdf",
     availableForWork: true,
   },
 
