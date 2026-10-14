@@ -169,13 +169,7 @@ export const PORTFOLIO_DATA = {
       technicalChallenges: [
         "Mengolah 51.888+ baris data operasional PostgreSQL dengan calculation engine deterministik real-time tanpa menyimpan nilai turunan FR di database",
       ],
-      techStack: [
-        "React.js",
-        "Node.js",
-        "Express.js",
-        "PostgreSQL",
-        "Tailwind CSS",
-      ],
+      techStack: ["React.js", "Node.js / Express.js", "PostgreSQL"],
       image: kidecoMatrixImg,
       githubUrl: "https://github.com/paylays/initial_d",
       featured: true,
@@ -199,13 +193,7 @@ export const PORTFOLIO_DATA = {
         "Merancang alur otorisasi berbasis peran (RBAC) yang aman untuk 3 jenis peran pengguna berbeda",
         "Mengoptimalkan arsitektur basis data relasional untuk menjaga integritas data pengajuan",
       ],
-      techStack: [
-        "Laravel",
-        "PHP",
-        "MySQL",
-        "Bootstrap / Tailwind",
-        "RESTful API",
-      ],
+      techStack: ["Laravel", "PHP", "Vue.js", "Inertia.js", "MySQL"],
       image: intersiImg,
       demoUrl: "https://intersi-itk.myst-tech.com",
       githubUrl: "https://github.com/paylays/sim-kp",
@@ -229,7 +217,7 @@ export const PORTFOLIO_DATA = {
       technicalChallenges: [
         "Menyediakan antarmuka yang sangat simpel agar ramah digunakan oleh warga dari berbagai kelompok usia",
       ],
-      techStack: ["PHP", "Laravel", "MySQL", "Tailwind CSS", "JavaScript"],
+      techStack: ["Laravel", "PHP", "MySQL"],
       image: rt36Img,
       demoUrl: "https://rt36-wonorejo.my.id",
       githubUrl: "https://github.com/paylays/administrasi-rt",
@@ -253,13 +241,7 @@ export const PORTFOLIO_DATA = {
       technicalChallenges: [
         "Mengintegrasikan API peta dan mengoptimalkan pemuatan gambar destinasi resolusi tinggi",
       ],
-      techStack: [
-        "React.js",
-        "Node.js",
-        "Express.js",
-        "PostgreSQL",
-        "Tailwind CSS",
-      ],
+      techStack: ["React.js", "Node.js / Express.js", "MySQL", "Tailwind CSS"],
       image: pariwisataImg,
       githubUrl: "https://github.com/paylays/sita-bpp",
       featured: false,
@@ -272,7 +254,8 @@ export const PORTFOLIO_DATA = {
       id: "cert-4",
       period: "2026",
       institution: "PT Kideco Jaya Agung (Indika Energy Group)",
-      degree: "Juara 2 Kategori Lomba Hackathon - KIDECO Innovation Challenge 2026",
+      degree:
+        "Juara 2 Kategori Lomba Hackathon - KIDECO Innovation Challenge 2026",
       description:
         "Meraih Juara 2 dalam kompetisi Hackathon KIDECO Innovation Challenge (KIC) 2026 dengan membangun Kideco Matrix, sistem monitoring analytics Fuel Ratio berbasis Standar Parameter Operasional (SPO).",
       highlights: [
@@ -311,7 +294,8 @@ export const PORTFOLIO_DATA = {
       id: "cert-1",
       period: "2022",
       institution: "Kominfo x Google (Digital Talent Scholarship)",
-      degree: "Sertifikat Pelatihan Google Digital Entrepreneurship (DEA Kominfo)",
+      degree:
+        "Sertifikat Pelatihan Google Digital Entrepreneurship (DEA Kominfo)",
       description:
         "Program Digital Entrepreneurship Academy (DEA) - Digital Talent Scholarship 2022 kerja sama Kominfo, Grow with Google, dan ITK Balikpapan.",
       highlights: [
@@ -489,7 +473,8 @@ export const PORTFOLIO_DATA_EN = {
       id: "cert-4",
       period: "2026",
       institution: "PT Kideco Jaya Agung (Indika Energy Group)",
-      degree: "2nd Place Winner - Hackathon Category - KIDECO Innovation Challenge 2026",
+      degree:
+        "2nd Place Winner - Hackathon Category - KIDECO Innovation Challenge 2026",
       description:
         "Won 2nd Place in the KIDECO Innovation Challenge (KIC) 2026 Hackathon by engineering Kideco Matrix, an SPO-based Contractor Fuel Ratio Monitoring & Analytics platform.",
       highlights: [
@@ -528,7 +513,8 @@ export const PORTFOLIO_DATA_EN = {
       id: "cert-1",
       period: "2022",
       institution: "Kominfo x Google (Digital Talent Scholarship)",
-      degree: "Google Digital Entrepreneurship Training Certificate (DEA Kominfo)",
+      degree:
+        "Google Digital Entrepreneurship Training Certificate (DEA Kominfo)",
       description:
         "Digital Entrepreneurship Academy (DEA) program under Kominfo Digital Talent Scholarship 2022 in collaboration with Grow with Google and ITK.",
       highlights: [
@@ -554,6 +540,6 @@ export const PORTFOLIO_DATA_EN = {
   ] as EducationItem[],
 };
 
-export const getPortfolioData = (lang: 'id' | 'en' = 'id') => {
-  return lang === 'en' ? PORTFOLIO_DATA_EN : PORTFOLIO_DATA;
+export const getPortfolioData = (lang: "id" | "en" = "id") => {
+  return lang === "en" ? PORTFOLIO_DATA_EN : PORTFOLIO_DATA;
 };
