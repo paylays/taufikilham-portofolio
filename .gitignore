@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Windows junction to .agents/skills/frontend-design, created by the skills CLI
+.claude/skills/frontend-design
