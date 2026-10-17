@@ -52,12 +52,21 @@ export const RevealBackground: React.FC = () => {
     let height = 0;
     let frame = 0;
 
+    const isDark = () => document.documentElement.classList.contains('dark');
+
     const draw = (time: number) => {
       frame = 0;
+      // Dark theme only; in the light theme CSS hides both layers
+      const open = pointer.inside && isDark();
+      // Open where the pointer is instead of sliding in from an old position
+      if (open && hole.scale < 0.01) {
+        hole.x = pointer.x;
+        hole.y = pointer.y;
+      }
       const follow = reduceMotion ? 1 : 0.25;
       hole.x += (pointer.x - hole.x) * follow;
       hole.y += (pointer.y - hole.y) * follow;
-      hole.scale += ((pointer.inside ? 1 : 0) - hole.scale) * (reduceMotion ? 1 : 0.2);
+      hole.scale += ((open ? 1 : 0) - hole.scale) * (reduceMotion ? 1 : 0.2);
 
       // Read the token on every draw so a theme switch repaints the cover in the new color
       ctx.globalCompositeOperation = 'source-over';
@@ -73,8 +82,8 @@ export const RevealBackground: React.FC = () => {
       // Keep animating while the edge is morphing or the opening is still catching up
       const settling =
         Math.abs(pointer.x - hole.x) + Math.abs(pointer.y - hole.y) > 0.5 ||
-        Math.abs((pointer.inside ? 1 : 0) - hole.scale) > 0.01;
-      if (!reduceMotion && (pointer.inside || settling)) {
+        Math.abs((open ? 1 : 0) - hole.scale) > 0.01;
+      if (!reduceMotion && (open || settling)) {
         frame = requestAnimationFrame(draw);
       }
     };
@@ -96,15 +105,11 @@ export const RevealBackground: React.FC = () => {
 
     const handleMove = (e: PointerEvent) => {
       if (e.pointerType === 'touch') return;
-      // Open where the pointer enters instead of sliding in from the last position
-      if (!pointer.inside) {
-        hole.x = e.clientX;
-        hole.y = e.clientY;
-      }
+      // Track the pointer in both themes so switching to dark opens the hole right under it
       pointer.x = e.clientX;
       pointer.y = e.clientY;
       pointer.inside = true;
-      requestDraw();
+      if (isDark()) requestDraw();
     };
 
     const handleLeave = () => {
@@ -116,7 +121,7 @@ export const RevealBackground: React.FC = () => {
       if (!e.relatedTarget) handleLeave();
     };
 
-    // The theme toggle swaps a class on <html>; repaint the cover when it does
+    // The theme toggle swaps a class on <html>; repaint, and open or close the hole, when it does
     const themeObserver = new MutationObserver(requestDraw);
     themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
 
