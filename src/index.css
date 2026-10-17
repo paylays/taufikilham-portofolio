@@ -112,6 +112,13 @@ ul {
   height: 100%;
 }
 
+/* Dark theme only: the photo is dark and would read as a black hole on the
+   light page. Hidden layers also keep the browser from downloading it. */
+html:not(.dark) .reveal-image,
+html:not(.dark) .reveal-cover {
+  display: none;
+}
+
 /* ── Header ───────────────────────────────────────── */
 
 .site-header {
