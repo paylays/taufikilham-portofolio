@@ -2,544 +2,582 @@ import intersiImg from "../assets/projects/Login - INTERSI.png";
 import rt36Img from "../assets/projects/Landing - Website Administrasi RT.36.png";
 import pariwisataImg from "../assets/projects/Explore More Pariwisata Balikpapan.png";
 import kidecoMatrixImg from "../assets/projects/Dashboard - Kideco Matrix.png";
+import cvPdf from "../assets/Taufik-Ilham-CV.pdf";
+import avatarImg from "../assets/profile-avatar.webp";
+import type { Language } from "../context/LanguageContext";
+
+// Every entry is written once with both languages side by side, so facts like
+// the tech stack cannot drift apart between the English and Indonesian versions.
+type Text = Record<Language, string>;
+type TextList = Record<Language, string[]>;
 
 export interface Project {
   id: string;
   title: string;
-  shortDescription: string;
-  fullDescription: string;
-  problemStatement: string;
-  keyFeatures: string[];
-  technicalChallenges: string[];
-  techStack: string[];
-  image: string;
+  tag: string;
+  isAward?: boolean;
+  summary: string;
+  role?: string;
+  description: string;
+  problem?: string;
+  features: string[];
+  notes: string[];
+  stack: string[];
+  image?: string;
   demoUrl?: string;
   githubUrl: string;
-  featured?: boolean;
 }
 
-export interface SkillCategory {
-  title: string;
-  skills: {
-    name: string;
-    level: "Advanced" | "Intermediate" | "Proficient";
-    iconName: string;
-  }[];
-}
-
-export interface EducationItem {
+export interface ExperienceItem {
   id: string;
+  role: string;
+  organization: string;
+  organizationUrl?: string;
   period: string;
-  institution: string;
-  degree: string;
-  description: string;
   highlights: string[];
-  type: "education" | "certification";
+  projectId?: string;
 }
 
-export const PORTFOLIO_DATA = {
-  personalInfo: {
-    name: "Taufik Ilham",
-    role: "Web Developer",
-    subtitle:
-      "Specializing in robust RESTful APIs, microservices architecture, efficient database schemas, and scalable backend infrastructure.",
-    bio: "Lulusan prodi Sistem Informasi di Institut Teknologi Kalimantan (ITK) yang berfokus pada Web Development. Berpengalaman merancang arsitektur server, RESTful API yang aman dan terstruktur, serta pengolahan basis data relasional & non-relasional. Berkomitmen pada performa tinggi, efisiensi sistem, serta pengintegrasian infrastruktur cloud & containerization.",
-    location: "Balikpapan, Indonesia",
-    email: "ilham1994.it@gmail.com",
-    phone: "+62 853-8743-2115",
-    github: "https://github.com/paylays",
-    linkedin: "https://www.linkedin.com/in/taufikilham/",
-    facebook:
-      "https://www.facebook.com/profile.php?fb_profile_edit_entry_point=%7B%22click_point%22%3A%22edit_profile_button%22%2C%22feature%22%3A%22profile_header%22%7D&id=100080858852174&sk=about",
-    twitter: "https://x.com/payylayss",
-    cvUrl: "/src/assets/Taufik-Ilham-CV.pdf",
-    availableForWork: true,
+export interface Credential {
+  id: string;
+  name: string;
+  issuer: string;
+  date: string;
+  credentialId?: string;
+  isAward?: boolean;
+}
+
+export interface StackGroup {
+  label: string;
+  items: string[];
+}
+
+const PERSONAL_INFO = {
+  name: "Taufik Ilham",
+  location: "Balikpapan, Indonesia",
+  email: "ilham1994.it@gmail.com",
+  phone: "+62 853-8743-2115",
+  github: "https://github.com/paylays",
+  linkedin: "https://www.linkedin.com/in/taufikilham/",
+  cvUrl: cvPdf,
+  avatar: avatarImg,
+};
+
+interface ProjectSource {
+  id: string;
+  title: string;
+  tag: Text;
+  isAward?: boolean;
+  summary: Text;
+  role?: Text;
+  description: Text;
+  problem?: Text;
+  features: TextList;
+  notes: TextList;
+  stack: string[];
+  image?: string;
+  demoUrl?: string;
+  githubUrl: string;
+}
+
+const PROJECTS: ProjectSource[] = [
+  {
+    id: "kideco",
+    title: "Kideco Matrix",
+    tag: { en: "Hackathon, 2nd place", id: "Hackathon, Juara 2" },
+    isAward: true,
+    summary: {
+      en: "Fuel ratio monitoring for mining contractors. 2nd place at the KIDECO Innovation Challenge 2026.",
+      id: "Monitoring fuel ratio kontraktor tambang. Juara 2 KIDECO Innovation Challenge 2026.",
+    },
+    role: {
+      en: "Frontend (React) and API integration, in a team",
+      id: "Frontend (React) dan integrasi API, dalam tim",
+    },
+    description: {
+      en: "A monitoring platform for the fuel ratio (FR) of mining contractors, based on Kideco's standard operating parameters (SPO). It explains why the fuel ratio forecast ran over plan, checks contractor data against the SPO and simulates how operational changes would bring the ratio down. It won 2nd place in the hackathon category of the KIDECO Innovation Challenge 2026 (certificate No. 2618/IT10.1/AK.05/2026, PT Kideco Jaya Agung, Indika Energy Group).",
+      id: "Platform monitoring fuel ratio (FR) kontraktor tambang berbasis Standar Parameter Operasional (SPO) Kideco. Sistem ini menjelaskan penyebab forecast fuel ratio melebihi rencana, memvalidasi data kontraktor terhadap SPO, dan menyimulasikan dampak perubahan operasional terhadap penurunan rasio. Meraih Juara 2 kategori hackathon KIDECO Innovation Challenge 2026 (Sertifikat No. 2618/IT10.1/AK.05/2026, PT Kideco Jaya Agung, Indika Energy Group).",
+    },
+    problem: {
+      en: "The mine's fuel ratio forecast was more than 17% over the annual plan, with no clear breakdown of the cause (low load on production equipment versus the number of support and dewatering units) and a risk of contractors over-claiming fuel.",
+      id: "Forecast fuel ratio operasional tambang membengkak lebih dari 17% dari rencana tahunan tanpa transparansi akar penyebab (low load alat produksi vs populasi unit support/dewatering), serta ada risiko klaim kelebihan konsumsi bahan bakar oleh kontraktor.",
+    },
+    features: {
+      en: [
+        "Multi-contractor dashboard with the fuel ratio broken down by activity: loading, hauling, supporting and dewatering",
+        "Deterministic variance decomposition that separates fuel use per hour (LPH) from productivity",
+        "Automatic SPO checks that flag low load, out-of-range LPH and inconsistent working hours",
+        "Interactive simulator that projects how the fuel ratio drops when operations change",
+        "Audit trail and a locked approval flow (draft, submitted, approved by Kideco) that keeps approved data from being changed",
+      ],
+      id: [
+        "Dashboard monitoring multi-kontraktor dengan breakdown fuel ratio per aktivitas: loading, hauling, supporting, dan dewatering",
+        "Dekomposisi selisih deterministik untuk memisahkan konsumsi LPH dari produktivitas",
+        "Validasi SPO otomatis untuk mendeteksi low load, LPH di luar batas, dan integritas jam kerja",
+        "Simulator penyelarasan interaktif untuk memproyeksikan penurunan fuel ratio",
+        "Audit trail dan alur approval terkunci (draft, diajukan, disetujui Kideco) agar data yang sudah disetujui tidak bisa diubah",
+      ],
+    },
+    notes: {
+      en: [
+        "The backend calculates the fuel ratio on the fly from 51,888+ rows of operational data in PostgreSQL instead of storing derived values.",
+        "My part was the React frontend and connecting it to the backend API.",
+      ],
+      id: [
+        "Backend menghitung fuel ratio secara langsung dari 51.888+ baris data operasional PostgreSQL tanpa menyimpan nilai turunan di database.",
+        "Bagian saya adalah frontend React dan integrasinya dengan API backend.",
+      ],
+    },
+    stack: ["React", "Node.js", "Express", "PostgreSQL"],
+    image: kidecoMatrixImg,
+    githubUrl: "https://github.com/paylays/initial_d",
   },
-
-  softSkills: [
-    "Problem Solving",
-    "Critical Thinking",
-    "Communication",
-    "Teamwork",
-    "Collaboration",
-    "Adaptability",
-    "Continuous Learning",
-    "Leadership",
-    "Decision Making",
-    "Flexibility",
-    "Project Management",
-  ],
-
-  aboutHighlights: [
-    {
-      title: "Backend & API Engineering",
-      description:
-        "Perancangan RESTful API & mikroservis aman, cepat, dan scalable menggunakan Node.js, Laravel, serta Python.",
+  {
+    id: "intersi",
+    title: "INTERSI-ITK",
+    tag: { en: "Thesis, in use", id: "Skripsi, digunakan" },
+    summary: {
+      en: "Internship management for ITK's Information Systems program, used by 40 to 60 students per period.",
+      id: "Sistem manajemen kerja praktik Prodi Sistem Informasi ITK, digunakan 40 sampai 60 mahasiswa per periode.",
     },
-    {
-      title: "Database & Schema Architecture",
-      description:
-        "Desain skema basis data relasional & NoSQL terstruktur dengan pemodelan relasi dan kueri yang efisien.",
+    role: { en: "Solo, full stack", id: "Sendiri, full stack" },
+    description: {
+      en: "My thesis project. It replaces a manual internship process spread across Google Sheets, Google Forms and Google Classroom with one system for submissions, document checks, supervisor assignment, monitoring and grading. It serves four roles: program coordinator, academic staff, lecturers and students. I built it using the Extreme Programming method.",
+      id: "Proyek skripsi saya. Sistem ini menggantikan proses kerja praktik manual yang tersebar di Google Spreadsheet, Google Form, dan Google Classroom menjadi satu sistem untuk pengajuan, verifikasi dokumen, penentuan dosen pembimbing, monitoring, dan penilaian. Ada empat peran pengguna: koordinator prodi, tendik, dosen, dan mahasiswa. Dikembangkan dengan metode Extreme Programming.",
     },
-    {
-      title: "System Problem Solver",
-      description:
-        "Pendekatan analitis dan pemikiran kritis dalam analisis logika bisnis, alur kerja sistem, dan penanganan bug.",
+    problem: {
+      en: "Internship administration was manual and slow, split across three platforms, and student progress was hard to monitor.",
+      id: "Administrasi kerja praktik masih manual dan memakan waktu, tersebar di tiga platform berbeda, dan progres mahasiswa sulit dipantau.",
     },
-    {
-      title: "Modern Workflow & DevOps",
-      description:
-        "Pengelolaan versi dengan Git/GitHub, containerization dengan Docker, serta penyebaran layanan di Cloud.",
-    },
-  ],
-
-  // 4 Skill Categories as specified by user
-  skillCategories: [
-    {
-      title: "Frontend Development",
-      skills: [
-        { name: "HTML5", level: "Advanced", iconName: "Layout" },
-        { name: "CSS3", level: "Advanced", iconName: "Css3" },
-        { name: "React.js", level: "Advanced", iconName: "Code2" },
-        { name: "Next.js", level: "Intermediate", iconName: "Nextjs" },
-        { name: "Vue.js", level: "Intermediate", iconName: "Vue" },
-        { name: "Vite", level: "Advanced", iconName: "Zap" },
-        { name: "Tailwind CSS", level: "Advanced", iconName: "Palette" },
+    features: {
+      en: [
+        "Online submission and document verification",
+        "Seminar scheduling and supervisor assignment",
+        "A separate dashboard for each of the four roles",
+        "Status notifications and data export",
+      ],
+      id: [
+        "Pengajuan dan verifikasi berkas kerja praktik secara online",
+        "Penjadwalan seminar dan penentuan dosen pembimbing",
+        "Dashboard terpisah untuk keempat peran",
+        "Notifikasi status pengajuan dan ekspor rekap data",
       ],
     },
-    {
-      title: "Backend Development",
-      skills: [
-        { name: "Node.js", level: "Advanced", iconName: "Server" },
-        { name: "Laravel", level: "Advanced", iconName: "Laravel" },
-        { name: "PHP", level: "Advanced", iconName: "Php" },
-        { name: "Python", level: "Intermediate", iconName: "Python" },
-        { name: "FastAPI", level: "Intermediate", iconName: "FastApi" },
-        { name: "RESTful API", level: "Advanced", iconName: "Globe" },
+    notes: {
+      en: [
+        "Role-based access control for the four user roles",
+        "A relational schema designed to keep submission data consistent",
+      ],
+      id: [
+        "Otorisasi berbasis peran (RBAC) untuk keempat peran pengguna",
+        "Skema basis data relasional yang menjaga konsistensi data pengajuan",
       ],
     },
-    {
-      title: "Database Management",
-      skills: [
-        { name: "MySQL", level: "Advanced", iconName: "Mysql" },
-        { name: "PostgreSQL", level: "Advanced", iconName: "Database" },
-        { name: "MongoDB", level: "Intermediate", iconName: "Layers" },
-        {
-          name: "Firebase Firestore",
-          level: "Intermediate",
-          iconName: "Firebase",
-        },
-        { name: "Supabase", level: "Intermediate", iconName: "Supabase" },
-      ],
-    },
-    {
-      title: "Tools & Workflow",
-      skills: [
-        { name: "GitHub", level: "Advanced", iconName: "Github" },
-        { name: "Postman", level: "Advanced", iconName: "Send" },
-        { name: "Figma", level: "Intermediate", iconName: "Figma" },
-        { name: "Docker", level: "Intermediate", iconName: "Docker" },
-        {
-          name: "Google Cloud Platform",
-          level: "Intermediate",
-          iconName: "Gcp",
-        },
-      ],
-    },
-  ] as SkillCategory[],
-
-  projects: [
-    {
-      id: "proj-1",
-      title: "Kideco Matrix (Contractor Fuel Ratio Monitoring & Analytics)",
-      shortDescription:
-        "🏆 Juara 2 Hackathon KIC 2026 — Sistem Monitoring Fuel Ratio & Simulator Penyelarasan Operasional Tambang.",
-      fullDescription:
-        "Platform sistem informasi monitoring efisiensi Fuel Ratio (FR) kontraktor tambang berbasis Standar Parameter Operasional (SPO) yang berhasil meraih JUARA 2 Kategori Lomba Hackathon KIDECO Innovation Challenge (KIC) 2026 (Sertifikat No. 2618/IT10.1/AK.05/2026 oleh PT Kideco Jaya Agung - Indika Energy Group). Sistem ini melakukan analisis dekomposisi deterministik atas selisih 17% konsumsi bahan bakar, validasi guardrail input SPO otomatis, perbandingan multi-kontraktor, serta simulasi interaktif penyelarasan parameter operasional (produktivitas, populasi unit support, & jarak angkut).",
-      problemStatement:
-        "Forecast Fuel Ratio operasional tambang membengkak over 17% dari rencana tahunan tanpa transparansi akar penyebab (low load alat produksi vs populasi unit support/dewatering) serta risiko klaim kelebihan konsumsi bahan bakar oleh kontraktor.",
-      keyFeatures: [
-        "🏆 Juara 2 Kategori Lomba Hackathon KIDECO Innovation Challenge (KIC) 2026",
-        "Dashboard Monitoring Multi-Kontraktor & breakdown FR per aktivitas (Loading, Hauling, Supporting, Dewatering)",
-        "Dekomposisi Selisih Deterministik untuk mengurai selisih konsumsi LPH vs produktivitas",
-        "Guardrail Validasi SPO Otomatis untuk mendeteksi low load, LPH out-of-bound, & integritas jam kerja",
-        "Simulator Penyelarasan Interaktif untuk proyeksi penurunan Fuel Ratio secara real-time",
-        "Audit Trail & Alur Approval Terkunci (Draft -> Diajukan -> Disetujui Kideco) pencegah manipulasi data",
-      ],
-      technicalChallenges: [
-        "Mengolah 51.888+ baris data operasional PostgreSQL dengan calculation engine deterministik real-time tanpa menyimpan nilai turunan FR di database",
-      ],
-      techStack: ["React.js", "Node.js / Express.js", "PostgreSQL"],
-      image: kidecoMatrixImg,
-      githubUrl: "https://github.com/paylays/initial_d",
-      featured: true,
-    },
-    {
-      id: "proj-2",
-      title: "INTERSI-ITK (Internship Sistem Informasi ITK)",
-      shortDescription:
-        "Sistem Informasi Manajemen Kerja Praktik & Magang Mahasiswa Sistem Informasi ITK.",
-      fullDescription:
-        "Platform sistem informasi terpadu yang memfasilitasi alur pengajuan, verifikasi dokumen, alokasi dosen pembimbing, serta penilaian kerja praktik mahasiswa Sistem Informasi Institut Teknologi Kalimantan.",
-      problemStatement:
-        "Proses administrasi kerja praktik sebelumnya dilakukan secara manual sehingga membutuhkan waktu lama dalam verifikasi berkas dan pemantauan status magang.",
-      keyFeatures: [
-        "Manajemen alur pengajuan & verifikasi berkas magang online",
-        "Penjadwalan seminar & alokasi pembimbing otomatis",
-        "Dashboard terpisah untuk Mahasiswa, Dosen, dan Admin Prodi",
-        "Notifikasi status pengajuan & integrasi ekspor rekapitulasi data",
-      ],
-      technicalChallenges: [
-        "Merancang alur otorisasi berbasis peran (RBAC) yang aman untuk 3 jenis peran pengguna berbeda",
-        "Mengoptimalkan arsitektur basis data relasional untuk menjaga integritas data pengajuan",
-      ],
-      techStack: ["Laravel", "PHP", "Vue.js", "Inertia.js", "MySQL"],
-      image: intersiImg,
-      demoUrl: "https://intersi-itk.myst-tech.com",
-      githubUrl: "https://github.com/paylays/sim-kp",
-      featured: true,
-    },
-    {
-      id: "proj-3",
-      title: "SI-RT (Sistem Informasi RT 36 Wonorejo)",
-      shortDescription:
-        "Sistem Pelayanan Digital Kependudukan dan Administrasi Keuangan RT 36 Wonorejo.",
-      fullDescription:
-        "Aplikasi layanan mandiri warga RT 36 Wonorejo Balikpapan untuk pengajuan surat pengantar, pengumuman warga, serta transparansi iuran kas lingkungan.",
-      problemStatement:
-        "Warga kesulitan mendapatkan informasi pengumuman dan surat pengantar secara cepat tanpa harus datang langsung ke rumah Ketua RT.",
-      keyFeatures: [
-        "Pengajuan surat keterangan kependudukan online",
-        "Modul pencatatan kas RT & laporan keuangan transparan",
-        "Papan pengumuman kegiatan & jadwal ronda malam warga",
-        "Responsive mobile-friendly UI",
-      ],
-      technicalChallenges: [
-        "Menyediakan antarmuka yang sangat simpel agar ramah digunakan oleh warga dari berbagai kelompok usia",
-      ],
-      techStack: ["Laravel", "PHP", "MySQL"],
-      image: rt36Img,
-      demoUrl: "https://rt36-wonorejo.my.id",
-      githubUrl: "https://github.com/paylays/administrasi-rt",
-      featured: true,
-    },
-    {
-      id: "proj-4",
-      title: "SITA-BPP (Sistem Informasi Pariwisata Kota Balikpapan)",
-      shortDescription:
-        "Portal Informasi Destinasi Wisata, Kuliner & Ekowisata Kota Balikpapan.",
-      fullDescription:
-        "Platform promosi dan direktori tempat wisata, kuliner lokal, fasilitas umum, dan acara kebudayaan Kota Balikpapan yang dilengkapi dengan peta lokasi interaktif.",
-      problemStatement:
-        "Informasi tempat wisata dan event kebudayaan di Balikpapan masih tersebar di banyak kanal sehingga wisatawan luar daerah kesulitan membuat rencana kunjungan.",
-      keyFeatures: [
-        "Direktori destinasi wisata dengan kategorisasi objek alam, kuliner, & budaya",
-        "Filter pencarian cepat berdasarkan lokasi dan rating pengunjung",
-        "Integrasi peta interaktif peta lokasi & petunjuk arah",
-        "CMS Admin untuk pembaruan data destinasi & event wisata",
-      ],
-      technicalChallenges: [
-        "Mengintegrasikan API peta dan mengoptimalkan pemuatan gambar destinasi resolusi tinggi",
-      ],
-      techStack: ["React.js", "Node.js / Express.js", "MySQL", "Tailwind CSS"],
-      image: pariwisataImg,
-      githubUrl: "https://github.com/paylays/sita-bpp",
-      featured: false,
-    },
-  ] as Project[],
-
-  // Ordered from newest (2026 -> 2022) as requested
-  educationTimeline: [
-    {
-      id: "cert-4",
-      period: "2026",
-      institution: "PT Kideco Jaya Agung (Indika Energy Group)",
-      degree:
-        "Juara 2 Kategori Lomba Hackathon - KIDECO Innovation Challenge 2026",
-      description:
-        "Meraih Juara 2 dalam kompetisi Hackathon KIDECO Innovation Challenge (KIC) 2026 dengan membangun Kideco Matrix, sistem monitoring analytics Fuel Ratio berbasis Standar Parameter Operasional (SPO).",
-      highlights: [
-        "Sertifikat Resmi No. 2618/IT10.1/AK.05/2026 dari HSE & Sustainability Director PT Kideco Jaya Agung",
-        "Mengembangkan dashboard monitoring multi-kontraktor, validasi SPO otomatis, dekomposisi selisih 17% FR, dan simulator penyelarasan operasional tambang",
-      ],
-      type: "certification",
-    },
-    {
-      id: "cert-3",
-      period: "2024",
-      institution: "HMSI ITK (Himpunan Mahasiswa Sistem Informasi)",
-      degree: "Sertifikat Pelatihan UI/UX Design - EKSPRESI 2024",
-      description:
-        "Pelatihan Edukasi dan Pelatihan Kreatif Sistem Informasi (EKSPRESI) dengan tema 'From Idea to Reality: Transforming Ideas into Visual with Figma'.",
-      highlights: [
-        "Sertifikat Resmi No. 2125/SFT-Pst/MEDFO/SYNERGIA/HMSI/I/2025 dari Himpunan Mahasiswa Sistem Informasi ITK",
-        "Pelatihan praktis perancangan antarmuka, wireframing visual, dan prototyping interaktif berbasis User-Centered Design menggunakan Figma",
-      ],
-      type: "certification",
-    },
-    {
-      id: "cert-2",
-      period: "2023",
-      institution: "HMSI ITK (Himpunan Mahasiswa Sistem Informasi)",
-      degree: "Sertifikat Workshop Full-Stack Web Developer - WORKER 2023",
-      description:
-        "Workshop Keprofesian (WORKER) dengan tema 'Becoming a Full-Stack Developer: A Comprehensive Learning Adventure'.",
-      highlights: [
-        "Sertifikat Resmi No. 1259/SFT-Pst/WORKER/BPH/MANSION/HMSI/IX/2023 dari HMSI ITK",
-        "Pembekalan komprehensif alur kerja pengembang web full-stack, arsitektur frontend & backend, serta integrasi sistem",
-      ],
-      type: "certification",
-    },
-    {
-      id: "cert-1",
-      period: "2022",
-      institution: "Kominfo x Google (Digital Talent Scholarship)",
-      degree:
-        "Sertifikat Pelatihan Google Digital Entrepreneurship (DEA Kominfo)",
-      description:
-        "Program Digital Entrepreneurship Academy (DEA) - Digital Talent Scholarship 2022 kerja sama Kominfo, Grow with Google, dan ITK Balikpapan.",
-      highlights: [
-        "Sertifikat Pelatihan Resmi No. DEA/2022/4679/145467935101-7 oleh Badan Penelitian & Pengembangan SDM Kominfo",
-        "Pembekalan strategi pemasaran digital (Plan Your Online Business Strategy) dan pengelolaan toko online (Build Your Online Shop)",
-      ],
-      type: "certification",
-    },
-    {
-      id: "edu-1",
-      period: "2022 - 2026",
-      institution: "Institut Teknologi Kalimantan (ITK)",
-      degree: "Sarjana Komputer (S.Kom) - Program Studi Sistem Informasi",
-      description:
-        "Menempuh pendidikan Sarjana Komputer di ITK Balikpapan dengan fokus pada Rekayasa Perangkat Lunak, Backend Web Development, Analisis Sistem Informasi, dan Manajemen Basis Data.",
-      highlights: [
-        "Academic IPK: 3.70 / 4.00",
-        "Aktif dalam berbagai proyek sistem informasi kampus dan instansi publik",
-        "Berfokus pada arsitektur sistem backend, API engineering, dan pengelolaan database",
-      ],
-      type: "education",
-    },
-  ] as EducationItem[],
-};
-
-export const PORTFOLIO_DATA_EN = {
-  ...PORTFOLIO_DATA,
-  personalInfo: {
-    ...PORTFOLIO_DATA.personalInfo,
-    subtitle:
-      "Specializing in robust RESTful APIs, microservices architecture, efficient database schemas, and scalable backend infrastructure.",
-    bio: "Information Systems graduate from Kalimantan Institute of Technology (ITK) focused on Web Development. Experienced in designing server architecture, secure RESTful APIs, and relational & NoSQL database management. Committed to high performance, system efficiency, and cloud infrastructure integration.",
+    stack: ["Laravel", "Vue", "Inertia.js", "MySQL"],
+    image: intersiImg,
+    demoUrl: "https://intersi-itk.myst-tech.com",
+    githubUrl: "https://github.com/paylays/sim-kp",
   },
-  aboutHighlights: [
-    {
-      title: "Backend & API Engineering",
-      description:
-        "Designing secure, fast, and scalable RESTful APIs & microservices using Node.js, Laravel, and Python.",
+  {
+    id: "sirt",
+    title: "SI-RT",
+    tag: { en: "In use", id: "Digunakan" },
+    summary: {
+      en: "Letter requests and neighborhood administration for RT 36 Wonorejo, used by 200+ residents.",
+      id: "Pengajuan surat dan administrasi RT 36 Wonorejo, digunakan oleh 200+ warga.",
     },
-    {
-      title: "Database & Schema Architecture",
-      description:
-        "Structured relational & NoSQL database schema design with efficient entity modeling and query optimization.",
+    role: { en: "Solo, full stack", id: "Sendiri, full stack" },
+    description: {
+      en: "A self-service site for residents of RT 36 Wonorejo, Balikpapan. Residents request cover letters online, read announcements and see how the neighborhood fund is used, without visiting the head of the RT in person.",
+      id: "Layanan mandiri untuk warga RT 36 Wonorejo, Balikpapan. Warga dapat mengajukan surat pengantar secara online, membaca pengumuman, dan melihat penggunaan kas RT tanpa harus datang ke rumah Ketua RT.",
     },
-    {
-      title: "System Problem Solver",
-      description:
-        "Analytical approach and critical thinking in business logic analysis, system workflows, and bug resolution.",
+    problem: {
+      en: "Residents had to visit the head of the RT in person to get a cover letter or hear about announcements.",
+      id: "Warga kesulitan mendapatkan informasi pengumuman dan surat pengantar secara cepat tanpa harus datang langsung ke rumah Ketua RT.",
     },
-    {
-      title: "Modern Workflow & DevOps",
-      description:
-        "Version control with Git/GitHub, containerization with Docker, and cloud service deployments.",
+    features: {
+      en: [
+        "Online requests for residence cover letters",
+        "Cash bookkeeping with a public financial report",
+        "Announcement board and night patrol schedule",
+        "Layout that works on phones",
+      ],
+      id: [
+        "Pengajuan surat keterangan kependudukan secara online",
+        "Pencatatan kas RT dan laporan keuangan yang transparan",
+        "Papan pengumuman kegiatan dan jadwal ronda malam",
+        "Tampilan yang nyaman di ponsel",
+      ],
     },
-  ],
-  projects: [
-    {
-      id: "proj-1",
-      title: "Kideco Matrix (Contractor Fuel Ratio Monitoring & Analytics)",
-      shortDescription:
-        "🏆 2nd Place Winner KIC 2026 Hackathon — Fuel Ratio Monitoring System & Mine Ops Alignment Simulator.",
-      fullDescription:
-        "Mine contractor Fuel Ratio (FR) efficiency monitoring web platform based on Standard Operating Parameters (SPO), which won 2nd Place in the KIDECO Innovation Challenge (KIC) 2026 Hackathon (Certificate No. 2618/IT10.1/AK.05/2026 by PT Kideco Jaya Agung - Indika Energy Group). Features a deterministic decomposition engine explaining the 17% fuel over-consumption variance, automated SPO input guardrails, multi-contractor benchmarking, and real-time operational parameter alignment simulation (productivity, support fleet population, & haulage distance).",
-      problemStatement:
-        "Mine operational Fuel Ratio forecast inflated over 17% from annual targets without clear root-cause breakdown (production equipment low-load vs support/dewatering fleet population) alongside financial risks of over-claim fuel consumption by contractors.",
-      keyFeatures: [
-        "🏆 2nd Place Winner of KIDECO Innovation Challenge (KIC) 2026 Hackathon",
-        "Multi-Contractor Monitoring Dashboard & FR Breakdown by Activity (Loading, Hauling, Supporting, Dewatering)",
-        "Deterministic Variance Decomposition isolating LPH consumption vs productivity ratios",
-        "Automated SPO Validation Guardrails detecting low-load, out-of-bound LPH, & calendar-hour integrity",
-        "Interactive Alignment Simulator projecting real-time Fuel Ratio reductions",
-        "Audit Trail & Locked Approval Workflow (Draft -> Submitted -> Approved by Kideco) preventing data manipulation",
-      ],
-      technicalChallenges: [
-        "Processing 51,888+ PostgreSQL operational rows with a real-time deterministic calculation engine without storing derived FR values in DB",
-      ],
-      techStack: [
-        "React.js",
-        "Node.js",
-        "Express.js",
-        "PostgreSQL",
-        "Tailwind CSS",
-      ],
-      image: kidecoMatrixImg,
-      githubUrl: "https://github.com/paylays/initial_d",
-      featured: true,
+    notes: {
+      en: ["An interface simple enough for residents of every age"],
+      id: ["Antarmuka yang sederhana agar mudah digunakan warga dari berbagai usia"],
     },
-    {
-      id: "proj-2",
-      title: "INTERSI-ITK (ITK Information Systems Internship Management)",
-      shortDescription:
-        "Internship & Field Work Management System for Information Systems Students at ITK.",
-      fullDescription:
-        "Integrated management system facilitating submission workflows, document verification, academic advisor allocation, and internship performance evaluation for Information Systems students at Kalimantan Institute of Technology.",
-      problemStatement:
-        "Previous internship administration processes were handled manually, causing delays in document verification and student internship tracking.",
-      keyFeatures: [
-        "Online internship document submission & verification workflow",
-        "Automated seminar scheduling & academic advisor assignment",
-        "Dedicated role-based dashboards for Students, Lecturers, and Dept Admin",
-        "Real-time submission status notifications & data export integration",
-      ],
-      technicalChallenges: [
-        "Designing secure Role-Based Access Control (RBAC) authorization for 3 distinct user roles",
-        "Optimizing relational database schema to guarantee submission data integrity",
-      ],
-      techStack: [
-        "Laravel",
-        "PHP",
-        "MySQL",
-        "Bootstrap / Tailwind",
-        "RESTful API",
-      ],
-      image: intersiImg,
-      demoUrl: "https://intersi-itk.myst-tech.com",
-      githubUrl: "https://github.com/paylays/sim-kp",
-      featured: true,
+    stack: ["Laravel", "PHP", "MySQL"],
+    image: rt36Img,
+    demoUrl: "https://rt36-wonorejo.my.id",
+    githubUrl: "https://github.com/paylays/administrasi-rt",
+  },
+  {
+    id: "sita",
+    title: "SITA-BPP",
+    tag: { en: "Internship", id: "Magang" },
+    summary: {
+      en: "A central directory of tourist destinations in Balikpapan, built during my internship.",
+      id: "Direktori terpusat destinasi wisata Kota Balikpapan, dibangun saat magang.",
     },
-    {
-      id: "proj-3",
-      title: "SI-RT (RT 36 Wonorejo Digital Neighborhood System)",
-      shortDescription:
-        "Digital Citizen Service & Financial Administration System for RT 36 Wonorejo.",
-      fullDescription:
-        "Self-service neighborhood web application for residents of RT 36 Wonorejo Balikpapan to request official cover letters, view announcements, and track neighborhood fund transparency.",
-      problemStatement:
-        "Residents faced difficulties obtaining announcement updates and cover letters quickly without visiting the RT Head's residence in person.",
-      keyFeatures: [
-        "Online population cover letter request workflow",
-        "RT cash bookkeeping module & transparent financial reporting",
-        "Community announcement board & night patrol schedule tracker",
-        "Responsive mobile-friendly UI design",
-      ],
-      technicalChallenges: [
-        "Crafting an intuitive interface accessible for residents across all age groups",
-      ],
-      techStack: ["PHP", "Laravel", "MySQL", "Tailwind CSS", "JavaScript"],
-      image: rt36Img,
-      demoUrl: "https://rt36-wonorejo.my.id",
-      githubUrl: "https://github.com/paylays/administrasi-rt",
-      featured: true,
+    role: { en: "Solo, full stack", id: "Sendiri, full stack" },
+    description: {
+      en: "A full-stack prototype I built during my internship at Dinas Pemuda Olahraga dan Pariwisata Kota Balikpapan, from requirements analysis to deployment. It collects nature, culinary and cultural spots, public facilities and events on one site with a map, for residents and tourists.",
+      id: "Prototipe full-stack yang saya bangun saat magang di Dinas Pemuda Olahraga dan Pariwisata Kota Balikpapan, dari analisis kebutuhan hingga deployment. Situs ini mengumpulkan wisata alam, kuliner, budaya, fasilitas umum, dan acara dalam satu tempat dengan peta, untuk warga dan wisatawan.",
     },
-    {
-      id: "proj-4",
-      title: "SITA-BPP (Balikpapan Tourism Information System)",
-      shortDescription:
-        "Tourism, Culinary & Ecotourism Information Portal for Balikpapan City.",
-      fullDescription:
-        "Promotion and directory platform for tourist destinations, local culinary spots, public facilities, and cultural events in Balikpapan City, featuring an interactive map.",
-      problemStatement:
-        "Tourism and cultural event information in Balikpapan was scattered across fragmented channels, making it hard for out-of-town visitors to plan visits.",
-      keyFeatures: [
-        "Tourism destination directory categorized by nature, culinary, & culture",
-        "Fast search filtering by location and visitor rating",
-        "Interactive map integration with directions & pinpoints",
-        "Admin CMS for updating destinations & event data",
-      ],
-      technicalChallenges: [
-        "Integrating map APIs and optimizing high-resolution destination image loading performance",
-      ],
-      techStack: [
-        "React.js",
-        "Node.js",
-        "Express.js",
-        "PostgreSQL",
-        "Tailwind CSS",
-      ],
-      image: pariwisataImg,
-      githubUrl: "https://github.com/paylays/sita-bpp",
-      featured: false,
+    problem: {
+      en: "The agency's tourism guidebook only existed in print and did not reach the whole city, so residents and tourists had no single place to find information about destinations in Balikpapan.",
+      id: "Buku panduan wisata dinas hanya tersedia dalam bentuk cetak dan tidak menjangkau seluruh kota, sehingga warga dan wisatawan tidak memiliki satu sumber informasi terpusat tentang destinasi wisata di Balikpapan.",
     },
-  ] as Project[],
-  educationTimeline: [
-    {
-      id: "cert-4",
-      period: "2026",
-      institution: "PT Kideco Jaya Agung (Indika Energy Group)",
-      degree:
-        "2nd Place Winner - Hackathon Category - KIDECO Innovation Challenge 2026",
-      description:
-        "Won 2nd Place in the KIDECO Innovation Challenge (KIC) 2026 Hackathon by engineering Kideco Matrix, an SPO-based Contractor Fuel Ratio Monitoring & Analytics platform.",
-      highlights: [
-        "Official Certificate No. 2618/IT10.1/AK.05/2026 issued by HSE & Sustainability Director of PT Kideco Jaya Agung",
-        "Engineered multi-contractor dashboard, automatic SPO guardrails, 17% FR variance decomposition, and mine ops alignment simulator",
+    features: {
+      en: [
+        "Destination directory grouped into nature, culinary and culture",
+        "Search filters by location and visitor rating",
+        "Interactive map with directions",
+        "Admin CMS for destinations and events",
       ],
-      type: "certification",
-    },
-    {
-      id: "cert-3",
-      period: "2024",
-      institution: "HMSI ITK (Information Systems Student Association)",
-      degree: "UI/UX Design Training Certification - EKSPRESI 2024",
-      description:
-        "Creative Information Systems Education & Training (EKSPRESI) themed 'From Idea to Reality: Transforming Ideas into Visual with Figma'.",
-      highlights: [
-        "Official Certificate No. 2125/SFT-Pst/MEDFO/SYNERGIA/HMSI/I/2025 issued by HMSI ITK",
-        "Hands-on training in UI design, visual wireframing, and interactive prototyping with User-Centered Design using Figma",
+      id: [
+        "Direktori destinasi wisata dengan kategori alam, kuliner, dan budaya",
+        "Filter pencarian berdasarkan lokasi dan rating pengunjung",
+        "Peta interaktif dengan petunjuk arah",
+        "CMS admin untuk memperbarui data destinasi dan acara",
       ],
-      type: "certification",
     },
-    {
-      id: "cert-2",
-      period: "2023",
-      institution: "HMSI ITK (Information Systems Student Association)",
-      degree: "Full-Stack Web Developer Workshop Certification - WORKER 2023",
-      description:
-        "Professional Workshop (WORKER) themed 'Becoming a Full-Stack Developer: A Comprehensive Learning Adventure'.",
-      highlights: [
-        "Official Certificate No. 1259/SFT-Pst/WORKER/BPH/MANSION/HMSI/IX/2023 issued by HMSI ITK",
-        "Comprehensive training covering full-stack web developer workflows, frontend & backend architecture, and system integration",
+    notes: {
+      en: ["Integrating a map API and keeping high-resolution destination photos quick to load"],
+      id: ["Mengintegrasikan API peta dan mengoptimalkan pemuatan foto destinasi beresolusi tinggi"],
+    },
+    stack: ["React", "Node.js", "Express", "MySQL"],
+    image: pariwisataImg,
+    githubUrl: "https://github.com/paylays/sita-bpp",
+  },
+  {
+    id: "myhotel",
+    title: "myhotel",
+    tag: { en: "Coursework", id: "Tugas kuliah" },
+    summary: {
+      en: "Online hotel booking, built for the Cloud Computing course.",
+      id: "Aplikasi reservasi hotel online, dibuat untuk mata kuliah Cloud Computing.",
+    },
+    role: {
+      en: "Backend and database (Flask, PostgreSQL), in a team",
+      id: "Backend dan basis data (Flask, PostgreSQL), dalam tim",
+    },
+    description: {
+      en: "A web app for booking hotel rooms online. Guests choose check-in and check-out dates and the number of guests, then see which rooms are available. Built as the major assignment for the Cloud Computing course over about half a semester.",
+      id: "Aplikasi web untuk memesan kamar hotel secara online. Tamu memilih tanggal check-in, check-out, dan jumlah tamu, lalu melihat kamar yang tersedia. Dibuat sebagai tugas besar mata kuliah Cloud Computing selama kurang lebih setengah semester.",
+    },
+    features: {
+      en: [
+        "Home page with a short introduction to the hotel",
+        "Booking form with check-in and check-out dates and number of guests",
+        "Room availability check",
       ],
-      type: "certification",
-    },
-    {
-      id: "cert-1",
-      period: "2022",
-      institution: "Kominfo x Google (Digital Talent Scholarship)",
-      degree:
-        "Google Digital Entrepreneurship Training Certificate (DEA Kominfo)",
-      description:
-        "Digital Entrepreneurship Academy (DEA) program under Kominfo Digital Talent Scholarship 2022 in collaboration with Grow with Google and ITK.",
-      highlights: [
-        "Official Certificate No. DEA/2022/4679/145467935101-7 issued by Kominfo HR Research & Development Board",
-        "Training in online business marketing strategy (Plan Your Online Business Strategy) and e-commerce platform management (Build Your Online Shop)",
+      id: [
+        "Halaman utama dengan informasi singkat tentang hotel",
+        "Form booking dengan tanggal check-in, check-out, dan jumlah tamu",
+        "Pengecekan ketersediaan kamar",
       ],
-      type: "certification",
     },
-    {
-      id: "edu-1",
-      period: "2022 - 2026",
-      institution: "Kalimantan Institute of Technology (ITK)",
-      degree: "Bachelor of Computer Science (S.Kom) - Information Systems",
-      description:
-        "Completed Bachelor's degree at ITK Balikpapan specializing in Software Engineering, Backend Web Development, Information Systems Analysis, and Database Management.",
-      highlights: [
-        "Academic GPA: 3.70 / 4.00",
-        "Active in multiple campus and public institution software development projects",
-        "Focused on backend system architecture, API engineering, and database optimization",
-      ],
-      type: "education",
-    },
-  ] as EducationItem[],
+    notes: { en: [], id: [] },
+    stack: ["React", "Vite", "Flask", "PostgreSQL"],
+    githubUrl: "https://github.com/paylays/myhotel",
+  },
+];
+
+interface ExperienceSource {
+  id: string;
+  role: Text;
+  organization: Text;
+  organizationUrl?: string;
+  period: Text;
+  highlights: TextList;
+  projectId?: string;
+}
+
+const ITK = { en: "Institut Teknologi Kalimantan", id: "Institut Teknologi Kalimantan" };
+const HMSI = {
+  en: "HMSI ITK (Information Systems Student Association)",
+  id: "HMSI ITK (Himpunan Mahasiswa Sistem Informasi)",
+};
+const INSPACE = {
+  en: "INSPACE (Information System Path to Creativity), HMSI ITK",
+  id: "INSPACE (Information System Path to Creativity), HMSI ITK",
 };
 
-export const getPortfolioData = (lang: "id" | "en" = "id") => {
-  return lang === "en" ? PORTFOLIO_DATA_EN : PORTFOLIO_DATA;
+// Newest first
+const WORK: ExperienceSource[] = [
+  {
+    id: "ta-cloud",
+    role: { en: "Teaching Assistant, Cloud Computing", id: "Asisten Dosen, Cloud Computing" },
+    organization: ITK,
+    period: { en: "Jul 2025 - Dec 2025", id: "Jul 2025 - Des 2025" },
+    highlights: {
+      en: [
+        "Helped students build web apps with Laravel, React and MySQL",
+        "Supported cloud deployment and CI/CD with GitHub Actions",
+        "Ran the practical sessions together with the lecturers",
+      ],
+      id: [
+        "Membantu mahasiswa membangun aplikasi web dengan Laravel, React, dan MySQL",
+        "Mendampingi deployment ke cloud dan CI/CD dengan GitHub Actions",
+        "Mengelola sesi praktikum bersama dosen",
+      ],
+    },
+  },
+  {
+    id: "ta-se",
+    role: { en: "Teaching Assistant, Software Engineering", id: "Asisten Dosen, Software Engineering" },
+    organization: ITK,
+    period: { en: "Jan 2025 - Jun 2025", id: "Jan 2025 - Jun 2025" },
+    highlights: {
+      en: [
+        "Assisted the course across its 16 weeks",
+        "Guided students in writing software requirements (SKPL) and design specifications (DPPL)",
+        "Coached students on development methodologies and UML-based analysis",
+      ],
+      id: [
+        "Mendampingi perkuliahan selama 16 minggu",
+        "Membimbing mahasiswa menyusun Spesifikasi Kebutuhan Perangkat Lunak (SKPL) dan Deskripsi Perancangan Perangkat Lunak (DPPL)",
+        "Membimbing penerapan metodologi pengembangan perangkat lunak dan analisis berbasis UML",
+      ],
+    },
+  },
+  {
+    id: "internship",
+    role: { en: "IT Support Intern", id: "Magang IT Support" },
+    organization: {
+      en: "Dinas Pemuda Olahraga dan Pariwisata Kota Balikpapan",
+      id: "Dinas Pemuda Olahraga dan Pariwisata Kota Balikpapan",
+    },
+    period: { en: "Dec 2024 - Feb 2025", id: "Des 2024 - Feb 2025" },
+    highlights: {
+      en: [
+        "Supported staff in the tourism division with laptops, printers and basic network issues",
+        "Compiled tourism data and automated registration for Pokdarwis (tourism awareness groups)",
+        "Noticed the agency's tourism guidebook only existed in print, then built SITA-BPP, a full-stack prototype, from requirements to deployment",
+      ],
+      id: [
+        "Memberikan dukungan IT untuk staf bidang pariwisata: laptop, printer, dan masalah jaringan dasar",
+        "Menyusun data pariwisata dan mengotomatiskan pendaftaran Pokdarwis (kelompok sadar wisata)",
+        "Melihat bahwa buku panduan wisata dinas hanya tersedia dalam bentuk cetak, lalu membangun SITA-BPP, prototipe full-stack, dari analisis kebutuhan hingga deployment",
+      ],
+    },
+    projectId: "sita",
+  },
+];
+
+// Newest first
+const ORGANIZATIONS: ExperienceSource[] = [
+  {
+    id: "treasurer",
+    role: { en: "Treasurer", id: "Bendahara" },
+    organization: HMSI,
+    period: { en: "Aug 2024 - Jun 2025", id: "Agu 2024 - Jun 2025" },
+    highlights: {
+      en: [
+        "Managed the association's budget, cash flow and financial reports",
+        "Planned budgets with division heads and tracked spending against them",
+      ],
+      id: [
+        "Mengelola anggaran, arus kas, dan laporan keuangan himpunan",
+        "Menyusun anggaran bersama kepala divisi dan memantau pengeluaran agar sesuai anggaran",
+      ],
+    },
+  },
+  {
+    id: "inspace-head",
+    role: { en: "Head of Sponsorship Division", id: "Kepala Divisi Sponsorship" },
+    organization: INSPACE,
+    organizationUrl: "https://inspace.itk.ac.id",
+    period: { en: "Dec 2023 - Aug 2024", id: "Des 2023 - Agu 2024" },
+    highlights: {
+      en: [
+        "Led the sponsorship team: wrote proposals, pitched to corporate and institutional partners and tracked progress toward the funding target",
+        "Maintained relationships with sponsors beyond a single event",
+      ],
+      id: [
+        "Memimpin tim sponsorship: menyusun proposal, presentasi ke mitra korporat dan institusi, serta memantau target pendanaan",
+        "Menjaga hubungan jangka panjang dengan sponsor",
+      ],
+    },
+  },
+  {
+    id: "inspace-staff",
+    role: { en: "Sponsorship Division Staff", id: "Staf Divisi Sponsorship" },
+    organization: INSPACE,
+    period: { en: "Mar 2023 - Dec 2023", id: "Mar 2023 - Des 2023" },
+    highlights: {
+      en: [
+        "Found and approached potential sponsors and prepared proposals",
+        "Handled communication with sponsors and helped the division reach its funding target",
+      ],
+      id: [
+        "Mencari dan menghubungi calon sponsor serta menyiapkan proposal",
+        "Menangani komunikasi dengan sponsor dan membantu divisi mencapai target pendanaan",
+      ],
+    },
+  },
+];
+
+const localizeExperience = (lang: Language) => (e: ExperienceSource): ExperienceItem => ({
+  id: e.id,
+  role: e.role[lang],
+  organization: e.organization[lang],
+  organizationUrl: e.organizationUrl,
+  period: e.period[lang],
+  highlights: e.highlights[lang],
+  projectId: e.projectId,
+});
+
+const EDUCATION = {
+  degree: {
+    en: "Bachelor of Computer Science (S.Kom), Information Systems",
+    id: "Sarjana Komputer (S.Kom), Sistem Informasi",
+  },
+  institution: "Institut Teknologi Kalimantan (ITK)",
+  period: "2022-2026",
+  gpa: "3.70 / 4.00",
+  thesisTitle:
+    "Pengembangan Sistem Informasi Manajemen Kerja Praktik dengan Metode Extreme Programming pada Program Studi Sistem Informasi ITK",
+  thesisTranslation: {
+    en: "Developing an internship management information system using Extreme Programming for the ITK Information Systems program",
+    id: "",
+  },
+  thesisProjectId: "intersi",
 };
+
+const CREDENTIALS: {
+  id: string;
+  name: Text;
+  issuer: Text;
+  date: Text;
+  credentialId?: string;
+  isAward?: boolean;
+}[] = [
+  {
+    id: "kic-2026",
+    name: {
+      en: "2nd place, Hackathon category, KIDECO Innovation Challenge 2026",
+      id: "Juara 2 Kategori Hackathon, KIDECO Innovation Challenge 2026",
+    },
+    issuer: {
+      en: "PT Kideco Jaya Agung (Indika Energy Group)",
+      id: "PT Kideco Jaya Agung (Indika Energy Group)",
+    },
+    date: { en: "2026", id: "2026" },
+    credentialId: "2618/IT10.1/AK.05/2026",
+    isAward: true,
+  },
+  {
+    id: "dicoding-js",
+    name: { en: "JavaScript Programming", id: "JavaScript Programming" },
+    issuer: { en: "Dicoding Indonesia", id: "Dicoding Indonesia" },
+    date: { en: "Feb 2023", id: "Feb 2023" },
+  },
+  {
+    id: "ekspresi-2024",
+    name: {
+      en: "UI/UX Design Workshop (EKSPRESI 2024)",
+      id: "Workshop UI/UX Design (EKSPRESI 2024)",
+    },
+    issuer: {
+      en: "HMSI, Institut Teknologi Kalimantan",
+      id: "HMSI, Institut Teknologi Kalimantan",
+    },
+    date: { en: "Oct 2024", id: "Okt 2024" },
+    credentialId: "2125/SFT-Pst/MEDFO/SYNERGIA/HMSI/I/2025",
+  },
+  {
+    id: "worker-2023",
+    name: {
+      en: "Professionalization Workshop: Becoming a Full Stack Developer (WORKER 2023)",
+      id: "Workshop Keprofesian: Becoming a Full Stack Developer (WORKER 2023)",
+    },
+    issuer: {
+      en: "HMSI, Institut Teknologi Kalimantan",
+      id: "HMSI, Institut Teknologi Kalimantan",
+    },
+    date: { en: "Oct 2023", id: "Okt 2023" },
+    credentialId: "1259/SFT-Pst/WORKER/BPH/MANSION/HMSI/IX/2023",
+  },
+  {
+    id: "dea-2022",
+    name: { en: "Google Digital Entrepreneurship", id: "Google Digital Entrepreneurship" },
+    issuer: {
+      en: "Digital Talent Scholarship, Kominfo",
+      id: "Digital Talent Scholarship, Kominfo",
+    },
+    date: { en: "Dec 2022", id: "Des 2022" },
+    credentialId: "DEA/2022/4679/145467935101-7",
+  },
+];
+
+const STACK: { label: Text; items: string[] }[] = [
+  {
+    label: { en: "Frontend", id: "Frontend" },
+    items: ["HTML", "CSS", "React", "Next.js", "Vue", "Inertia.js", "Vite", "Tailwind CSS"],
+  },
+  {
+    label: { en: "Backend", id: "Backend" },
+    items: ["Node.js (Express)", "Laravel (PHP)", "Python (Flask, FastAPI)", "REST APIs"],
+  },
+  {
+    label: { en: "Databases", id: "Basis data" },
+    items: ["MySQL", "PostgreSQL", "MongoDB", "Firebase Firestore", "Supabase"],
+  },
+  {
+    label: { en: "Tools", id: "Tools" },
+    items: ["Git", "GitHub", "GitHub Actions", "Docker", "Postman", "Figma", "Google Cloud Platform"],
+  },
+];
+
+export const getPortfolioData = (lang: Language) => ({
+  personalInfo: PERSONAL_INFO,
+  projects: PROJECTS.map(
+    (p): Project => ({
+      id: p.id,
+      title: p.title,
+      tag: p.tag[lang],
+      isAward: p.isAward,
+      summary: p.summary[lang],
+      role: p.role?.[lang],
+      description: p.description[lang],
+      problem: p.problem?.[lang],
+      features: p.features[lang],
+      notes: p.notes[lang],
+      stack: p.stack,
+      image: p.image,
+      demoUrl: p.demoUrl,
+      githubUrl: p.githubUrl,
+    }),
+  ),
+  work: WORK.map(localizeExperience(lang)),
+  organizations: ORGANIZATIONS.map(localizeExperience(lang)),
+  education: {
+    degree: EDUCATION.degree[lang],
+    institution: EDUCATION.institution,
+    period: EDUCATION.period,
+    gpa: EDUCATION.gpa,
+    thesisTitle: EDUCATION.thesisTitle,
+    thesisTranslation: EDUCATION.thesisTranslation[lang],
+    thesisProjectId: EDUCATION.thesisProjectId,
+  },
+  credentials: CREDENTIALS.map(
+    (c): Credential => ({
+      id: c.id,
+      name: c.name[lang],
+      issuer: c.issuer[lang],
+      date: c.date[lang],
+      credentialId: c.credentialId,
+      isAward: c.isAward,
+    }),
+  ),
+  stack: STACK.map((g): StackGroup => ({ label: g.label[lang], items: g.items })),
+});
