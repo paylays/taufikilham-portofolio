@@ -9,11 +9,13 @@ import { EducationSection } from './components/sections/EducationSection';
 import { CredentialsSection } from './components/sections/CredentialsSection';
 import { SkillsSection } from './components/sections/SkillsSection';
 import { ContactSection } from './components/sections/ContactSection';
+import { RevealBackground } from './components/RevealBackground';
 import './index.css';
 
 export function AppContent() {
   return (
     <>
+      <RevealBackground />
       <Header />
       <main className="page">
         <IntroSection />
