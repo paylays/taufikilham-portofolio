@@ -10,6 +10,7 @@ import { CredentialsSection } from './components/sections/CredentialsSection';
 import { SkillsSection } from './components/sections/SkillsSection';
 import { ContactSection } from './components/sections/ContactSection';
 import { RevealBackground } from './components/RevealBackground';
+import { ScrollMeter } from './components/ScrollMeter';
 import './index.css';
 
 export function AppContent() {
@@ -28,6 +29,7 @@ export function AppContent() {
         <ContactSection />
       </main>
       <Footer />
+      <ScrollMeter />
     </>
   );
 }

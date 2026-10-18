@@ -44,6 +44,8 @@ export const TRANSLATIONS = {
       close: "Close",
       openLive: "Open live site",
       openCode: "View code on GitHub",
+      imageLoading: "Loading screenshot",
+      imageError: "The screenshot did not load. Reload the page to try again.",
     },
     experience: {
       title: "Experience",
@@ -115,6 +117,8 @@ export const TRANSLATIONS = {
       close: "Tutup",
       openLive: "Buka situs",
       openCode: "Lihat kode di GitHub",
+      imageLoading: "Memuat tangkapan layar",
+      imageError: "Tangkapan layar gagal dimuat. Muat ulang halaman untuk mencoba lagi.",
     },
     experience: {
       title: "Pengalaman",

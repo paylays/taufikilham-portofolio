@@ -26,6 +26,8 @@ The owner is an FC Barcelona fan. Blue `#004d98` and garnet `#a50044` are the on
 
 - Header crest (added at the owner's request): the header shows the short name "Ilham" followed by a small monochrome FC Barcelona crest, black in the light theme and white in the dark one. It sits after the name, not before it, so it reads as a fan mark rather than the site's own logo. In the dark theme it is the visible hint of the hidden crest wallpaper.
 
+- Scroll meter (added at the owner's request): a small readout in the bottom right corner shows how far down the page the reader is, as a percentage next to a copy of the section divider. The divider fills blue through the first half of the page and garnet through the second, like the two halves of a match. It appears once the page is scrolled and ignores clicks, so it never blocks the text under it.
+
 Dark theme lightens both colors only where they are used as text: `#5a9be8` and `#f0506e`.
 
 ## Type
@@ -46,4 +48,4 @@ Inter for everything, matching the reference: neutral and readable at 16px. JetB
 
 - ENERGY 1: quiet. Neutral page, color only on links and awards.
 - RHYTHM 1: every section uses the same simple heading and list pattern, on purpose. Reading order is the structure.
-- MOTION 2: hover and focus changes, plus the pointer reveal of the hidden background in the dark theme, whose edge slowly changes shape. Nothing else moves: no scroll animation, smooth-scroll library or custom cursor. The reveal is off on touch screens and keeps a still shape when the visitor prefers reduced motion.
+- MOTION 2: hover and focus changes, plus the pointer reveal of the hidden background in the dark theme, whose edge slowly changes shape. The scroll meter moves only with the reader's own scrolling. Images show a gray placeholder that pulses softly until the file arrives (added at the owner's request), and the project screenshot placeholder says what it is loading, or why it failed. Nothing else moves: no scroll animation, smooth-scroll library or custom cursor. The reveal is off on touch screens. When the visitor prefers reduced motion, the reveal keeps a still shape and the placeholder stops pulsing.

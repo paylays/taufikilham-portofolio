@@ -119,6 +119,62 @@ html:not(.dark) .reveal-cover {
   display: none;
 }
 
+/* ── Images ───────────────────────────────────────── */
+
+/* The box keeps the image ratio while the skeleton shows (see LazyImage.tsx) */
+.lazy-image {
+  position: relative;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background-color: var(--chip-bg);
+}
+
+.lazy-image img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.lazy-image[data-state='loading'] {
+  animation: skeleton-pulse 1s ease-in-out infinite alternate;
+}
+
+.lazy-image[data-state='loaded'] {
+  background-color: transparent;
+}
+
+.lazy-image[data-state='loaded'] img {
+  opacity: 1;
+}
+
+.lazy-image-message {
+  position: relative;
+  padding: 1rem;
+  font-size: 0.9rem;
+  text-align: center;
+  color: var(--text);
+}
+
+@keyframes skeleton-pulse {
+  from { background-color: var(--chip-bg); }
+  to { background-color: var(--border); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lazy-image[data-state='loading'] {
+    animation: none;
+  }
+
+  .lazy-image img {
+    transition: none;
+  }
+}
+
 /* ── Header ───────────────────────────────────────── */
 
 .site-header {
@@ -389,12 +445,61 @@ html:not(.dark) .reveal-cover {
 
 /* ── Footer ───────────────────────────────────────── */
 
+/* The bottom padding keeps the last line clear of the scroll meter */
 .site-footer {
   max-width: 42rem;
   margin: 0 auto;
-  padding: 0 1.5rem 3rem;
+  padding: 0 1.5rem 4rem;
   font-size: 0.9rem;
   color: var(--text-dim);
+}
+
+/* ── Scroll meter ─────────────────────────────────── */
+
+/* A copy of the section divider that fills as the page scrolls:
+   blue through the first half, garnet through the second, like a match */
+.scroll-meter {
+  position: fixed;
+  right: 1.5rem;
+  bottom: 1.5rem;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.3rem 0.6rem;
+  border-radius: 6px;
+  background: var(--bg);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.scroll-meter[data-visible='true'] {
+  opacity: 1;
+}
+
+.scroll-meter-value {
+  min-width: 2.4rem;
+  font-size: 0.85rem;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.5;
+  text-align: right;
+  color: var(--text-dim);
+}
+
+.scroll-meter-line {
+  position: relative;
+  width: 3.5rem;
+  height: 2px;
+  background: var(--border);
+}
+
+.scroll-meter-line::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, var(--color-blue-text) 50%, var(--color-garnet-text) 50%);
+  clip-path: inset(0 calc(100% - var(--progress) * 100%) 0 0);
 }
 
 /* ── Project case study dialog ────────────────────── */
@@ -522,7 +627,12 @@ html:not(.dark) .reveal-cover {
   }
 
   .site-footer {
-    padding: 0 1.25rem 2.5rem;
+    padding: 0 1.25rem 3.75rem;
+  }
+
+  .scroll-meter {
+    right: 1rem;
+    bottom: 1rem;
   }
 
   .stack-row {
