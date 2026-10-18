@@ -29,7 +29,7 @@ The owner is an FC Barcelona fan. Blue `#004d98` and garnet `#a50044` are the on
 
 - Scroll meter (added at the owner's request): a small readout in the bottom right corner shows how far down the page the reader is, as a percentage next to a copy of the section divider. The divider fills blue through the first half of the page and garnet through the second, like the two halves of a match. It appears once the page is scrolled and ignores clicks, so it never blocks the text under it.
 
-- Growing branches (added at the owner's request, after the plum background on antfu.me): on each visit, thin gray branches grow in slowly from the edges of the window and stop by themselves. They fade toward the middle, so the text column stays clear. The same faint gray works on the white and the black page. Phones get two trees instead of four.
+- Growing branches (added at the owner's request, after the plum background on antfu.me): on each visit, thin gray branches grow in slowly from the edges of the window and stop by themselves. They fade toward the middle, so the text column stays clear. The gray is stronger on the black page (25%) than on the white one (12%), because gray reads fainter on pure black. Both stay low enough for dim text over a branch to keep 4.5:1. Phones get two trees instead of four.
 
 Dark theme lightens both colors only where they are used as text: `#5a9be8` and `#f0506e`. Its background is pure black `#000000` at the owner's request, not a tinted near-black.
 
