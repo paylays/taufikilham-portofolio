@@ -54,6 +54,8 @@ export interface StackGroup {
 
 const PERSONAL_INFO = {
   name: "Taufik Ilham",
+  // The header uses the short name; the intro and footer keep the full one
+  shortName: "Ilham",
   location: "Balikpapan, Indonesia",
   email: "ilham1994.it@gmail.com",
   phone: "+62 853-8743-2115",

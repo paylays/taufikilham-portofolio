@@ -24,6 +24,8 @@ The owner is an FC Barcelona fan. Blue `#004d98` and garnet `#a50044` are the on
 - The section divider is a short line in both colors. It is the one repeated motif.
 - Hidden background (added at the owner's request, dark theme only): an FC Barcelona crest wallpaper sits under the whole page, covered by the page color. Only a small, irregular opening around the mouse pointer, about 1.5 to 2.7cm across, shows it. It is the one playful moment on an otherwise quiet page. The light theme stays plain white, because the dark photo would read as a black hole there.
 
+- Header crest (added at the owner's request): the header shows the short name "Ilham" followed by a small monochrome FC Barcelona crest, black in the light theme and white in the dark one. It sits after the name, not before it, so it reads as a fan mark rather than the site's own logo. In the dark theme it is the visible hint of the hidden crest wallpaper.
+
 Dark theme lightens both colors only where they are used as text: `#5a9be8` and `#f0506e`.
 
 ## Type

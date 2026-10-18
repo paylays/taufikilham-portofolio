@@ -5,16 +5,22 @@ import { GithubIcon, LinkedinIcon } from '../SocialIcons';
 import { useTheme } from '../../context/ThemeContext';
 import { useLanguage } from '../../context/LanguageContext';
 import { TRANSLATIONS } from '../../data/translations';
+import crestBlack from '../../assets/spain_barcelona--black-monochrome.football-logos.cc.svg';
+import crestWhite from '../../assets/spain_barcelona--white-monochrome.football-logos.cc.svg';
 
 export const Header: React.FC = () => {
   const { theme, toggleTheme } = useTheme();
   const { language, toggleLanguage } = useLanguage();
   const t = TRANSLATIONS[language].header;
-  const { name, github, linkedin } = getPortfolioData(language).personalInfo;
+  const { shortName, github, linkedin } = getPortfolioData(language).personalInfo;
 
   return (
     <header id="top" className="site-header">
-      <a href="#top" className="site-name">{name}</a>
+      <a href="#top" className="site-name">
+        {shortName}
+        {/* Fan mark after the name, not before it, so it does not read as the site's own logo */}
+        <img src={theme === 'dark' ? crestWhite : crestBlack} alt="" width={20} height={20} />
+      </a>
 
       <nav className="site-nav-links" aria-label={t.navLabel}>
         <a href="#projects" className="nav-link">{t.projects}</a>
