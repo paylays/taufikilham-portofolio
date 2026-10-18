@@ -48,6 +48,13 @@ html {
   -webkit-text-size-adjust: 100%;
 }
 
+/* Nav and in-page links glide to their section instead of jumping */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
 body {
   background-color: var(--bg);
   color: var(--text);
