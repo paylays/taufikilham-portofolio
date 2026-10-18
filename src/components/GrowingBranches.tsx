@@ -8,7 +8,7 @@ const BUSHY_STEPS = 30;
 // Hard stop so a tree that keeps forking inside the page cannot run forever
 const MAX_STEPS = 20000;
 const FRAME_MS = 1000 / 40;
-// Opaque here; the canvas opacity in CSS fades it, so crossing strokes never stack darker
+// Opaque here; --branch-opacity in CSS sets the gray per theme, and crossing strokes never stack darker
 const COLOR = '#888888';
 
 type Step = () => void;
