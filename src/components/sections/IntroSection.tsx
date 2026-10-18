@@ -3,6 +3,7 @@ import { Download } from 'lucide-react';
 import { getPortfolioData } from '../../data/portfolioData';
 import { useLanguage } from '../../context/LanguageContext';
 import { TRANSLATIONS } from '../../data/translations';
+import { LazyImage } from '../LazyImage';
 import {
   ReactIcon, VueIcon, NodejsIcon, LaravelIcon, MysqlIcon, PostgresIcon,
 } from '../TechBrandIcons';
@@ -25,7 +26,8 @@ export const IntroSection: React.FC = () => {
   return (
     <section className="prose" aria-labelledby="intro-title">
       <div className="intro-head">
-        <img src={avatar} alt={t.photoAlt} width={72} height={72} className="avatar" />
+        {/* Above the fold, so lazy loading would only delay it */}
+        <LazyImage src={avatar} alt={t.photoAlt} width={72} height={72} loading="eager" className="avatar" />
         <h1 id="intro-title" className="intro-name">{name}</h1>
       </div>
 
@@ -52,7 +54,7 @@ export const IntroSection: React.FC = () => {
       <p>{t.looking}</p>
 
       <div className="actions">
-        <a href={cvUrl} download="Taufik-Ilham-CV.pdf" className="text-link">
+        <a href={cvUrl} download="Taufik-Ilham-CV-ID.pdf" className="text-link">
           <Download size={16} /> {t.downloadCv}
         </a>
         <a href="#contact" className="text-link">{t.contactMe}</a>

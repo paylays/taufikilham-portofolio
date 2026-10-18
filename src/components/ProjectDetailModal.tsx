@@ -4,6 +4,7 @@ import { X, ArrowUpRight } from "lucide-react";
 import type { Project } from "../data/portfolioData";
 import { useLanguage } from "../context/LanguageContext";
 import { TRANSLATIONS } from "../data/translations";
+import { LazyImage } from "./LazyImage";
 
 interface ProjectDetailModalProps {
   project: Project | null;
@@ -89,7 +90,16 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
         </div>
 
         {project.image && (
-          <img src={project.image} alt={project.title} className="modal-image" />
+          // Every project screenshot is exported at 1857 by 1030
+          <LazyImage
+            src={project.image}
+            alt={project.title}
+            width={1857}
+            height={1030}
+            className="modal-image"
+            loadingText={t.imageLoading}
+            errorText={t.imageError}
+          />
         )}
 
         <dl className="modal-facts">

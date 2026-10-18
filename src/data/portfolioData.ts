@@ -2,7 +2,7 @@ import intersiImg from "../assets/projects/Login - INTERSI.png";
 import rt36Img from "../assets/projects/Landing - Website Administrasi RT.36.png";
 import pariwisataImg from "../assets/projects/Explore More Pariwisata Balikpapan.png";
 import kidecoMatrixImg from "../assets/projects/Dashboard - Kideco Matrix.png";
-import cvPdf from "../assets/Taufik-Ilham-CV.pdf";
+import cvPdf from "../assets/Taufik-Ilham-CV-ID.pdf";
 import avatarImg from "../assets/profile-avatar.webp";
 import type { Language } from "../context/LanguageContext";
 
