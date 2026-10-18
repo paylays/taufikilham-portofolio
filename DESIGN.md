@@ -31,7 +31,7 @@ The owner is an FC Barcelona fan. Blue `#004d98` and garnet `#a50044` are the on
 
 - Growing branches (added at the owner's request, after the plum background on antfu.me): on each visit, thin gray branches grow in slowly from the edges of the window and stop by themselves. They fade toward the middle, so the text column stays clear. The same faint gray works on the white and the black page. Phones get two trees instead of four.
 
-Dark theme lightens both colors only where they are used as text: `#5a9be8` and `#f0506e`.
+Dark theme lightens both colors only where they are used as text: `#5a9be8` and `#f0506e`. Its background is pure black `#000000` at the owner's request, not a tinted near-black.
 
 ## Type
 
