@@ -128,6 +128,8 @@ html:not(.dark) .reveal-cover {
   z-index: -1;
   width: 100%;
   pointer-events: none;
+  /* Caps any branch at 12%, which keeps dim text at 4.5:1 or better in both themes */
+  opacity: 0.12;
   /* Fades out toward the middle, so the branches stay faint behind the text */
   mask-image: radial-gradient(circle, transparent, black);
 }
