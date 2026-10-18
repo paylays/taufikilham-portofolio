@@ -35,7 +35,7 @@ Dark theme lightens both colors only where they are used as text: `#5a9be8` and 
 
 ## Type
 
-Inter for everything, matching the reference: neutral and readable at 16px. Weights stay slim at the owner's request: 400 for text, 500 for the name, headings and the few emphasized labels. Size and color carry the hierarchy, not weight. JetBrains Mono only for literal data such as the email address and certificate numbers.
+Inter for everything, matching the reference: neutral and readable at 16px. Weights stay thin at the owner's request, thinner than the reference: 200 for the name, 300 for body text and section headings, 400 for the small titles and labels that must stand out from 300 body text. JetBrains Mono uses 300 to match. Size and color carry the hierarchy, not weight. JetBrains Mono only for literal data such as the email address and certificate numbers.
 
 ## Content hierarchy
 
