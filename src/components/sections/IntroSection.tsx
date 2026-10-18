@@ -54,7 +54,7 @@ export const IntroSection: React.FC = () => {
       <p>{t.looking}</p>
 
       <div className="actions">
-        <a href={cvUrl} download="Taufik-Ilham-CV-ID.pdf" className="text-link">
+        <a href={cvUrl} download="Taufik-Ilham-CV-EN.pdf" className="text-link">
           <Download size={16} /> {t.downloadCv}
         </a>
         <a href="#contact" className="text-link">{t.contactMe}</a>

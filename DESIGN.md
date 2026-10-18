@@ -8,8 +8,9 @@ Dial: ENERGY 1 / RHYTHM 1 / MOTION 2
 
 The owner asked for the minimal, text-first style of antfu.me. Borrow its structure, not its signature:
 
-- Take: one centered reading column (about 42rem), a large bold name, gray body text with brighter linked text, small inline chips, a short divider between blocks, and a quiet top nav.
-- Leave: the handwritten logo, the generative plum and dot backgrounds, and the giant outlined headings on the projects page. Those are his identity.
+- Take: one centered reading column (about 42rem), a large name, gray body text with brighter linked text, small inline chips, a short divider between blocks, and a quiet top nav.
+- Leave: the handwritten logo, the dot background, and the giant outlined headings on the projects page. Those are his identity.
+- The owner later asked for his growing plum branches as well (see Signature).
 
 ## Identity
 
@@ -28,11 +29,13 @@ The owner is an FC Barcelona fan. Blue `#004d98` and garnet `#a50044` are the on
 
 - Scroll meter (added at the owner's request): a small readout in the bottom right corner shows how far down the page the reader is, as a percentage next to a copy of the section divider. The divider fills blue through the first half of the page and garnet through the second, like the two halves of a match. It appears once the page is scrolled and ignores clicks, so it never blocks the text under it.
 
+- Growing branches (added at the owner's request, after the plum background on antfu.me): on each visit, thin gray branches grow in slowly from the edges of the window and stop by themselves. They fade toward the middle, so the text column stays clear. The same faint gray works on the white and the black page. Phones get two trees instead of four.
+
 Dark theme lightens both colors only where they are used as text: `#5a9be8` and `#f0506e`.
 
 ## Type
 
-Inter for everything, matching the reference: neutral and readable at 16px. JetBrains Mono only for literal data such as the email address and certificate numbers.
+Inter for everything, matching the reference: neutral and readable at 16px. Weights stay slim at the owner's request: 400 for text, 500 for the name, headings and the few emphasized labels. Size and color carry the hierarchy, not weight. JetBrains Mono only for literal data such as the email address and certificate numbers.
 
 ## Content hierarchy
 
@@ -48,4 +51,4 @@ Inter for everything, matching the reference: neutral and readable at 16px. JetB
 
 - ENERGY 1: quiet. Neutral page, color only on links and awards.
 - RHYTHM 1: every section uses the same simple heading and list pattern, on purpose. Reading order is the structure.
-- MOTION 2: hover and focus changes, plus the pointer reveal of the hidden background in the dark theme, whose edge slowly changes shape. The scroll meter moves only with the reader's own scrolling. Images show a gray placeholder that pulses softly until the file arrives (added at the owner's request), and the project screenshot placeholder says what it is loading, or why it failed. Nothing else moves: no scroll animation, smooth-scroll library or custom cursor. The reveal is off on touch screens. When the visitor prefers reduced motion, the reveal keeps a still shape and the placeholder stops pulsing.
+- MOTION 2: hover and focus changes, plus the pointer reveal of the hidden background in the dark theme, whose edge slowly changes shape. The growing branches are the one page-load moment: they grow once and stop. The scroll meter moves only with the reader's own scrolling. Images show a gray placeholder that pulses softly until the file arrives (added at the owner's request), and the project screenshot placeholder says what it is loading, or why it failed. Nothing else moves: no scroll animation, smooth-scroll library or custom cursor. The reveal is off on touch screens. When the visitor prefers reduced motion, the reveal keeps a still shape, the branches appear fully grown, and the placeholder stops pulsing.
