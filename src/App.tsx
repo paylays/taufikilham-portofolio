@@ -11,12 +11,15 @@ import { SkillsSection } from './components/sections/SkillsSection';
 import { ContactSection } from './components/sections/ContactSection';
 import { RevealBackground } from './components/RevealBackground';
 import { ScrollMeter } from './components/ScrollMeter';
+import { GrowingBranches } from './components/GrowingBranches';
 import './index.css';
 
 export function AppContent() {
   return (
     <>
       <RevealBackground />
+      {/* After the reveal so the branches paint above its page-colored cover */}
+      <GrowingBranches />
       <Header />
       <main className="page">
         <IntroSection />
