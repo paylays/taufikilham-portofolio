@@ -16,7 +16,14 @@ export const SkillsSection: React.FC = () => {
         {stack.map((group) => (
           <div key={group.label} className="stack-row">
             <dt>{group.label}</dt>
-            <dd>{group.items.join(', ')}</dd>
+            <dd>
+              {group.items.map((item, i) => (
+                <React.Fragment key={item}>
+                  {i > 0 && ', '}
+                  <span className="stack-item">{item}</span>
+                </React.Fragment>
+              ))}
+            </dd>
           </div>
         ))}
       </dl>

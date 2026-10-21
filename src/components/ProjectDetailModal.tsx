@@ -90,7 +90,7 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
         </div>
 
         {project.image && (
-          // Every project screenshot is exported at 1857 by 1030
+          // The frame uses the 1857 by 1030 ratio most screenshots share; other ratios are trimmed from the bottom (.modal-image img in index.css)
           <LazyImage
             src={project.image}
             alt={project.title}
