@@ -103,26 +103,14 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
         )}
 
         <dl className="modal-facts">
-          {project.role && (
-            <div>
-              <dt>{t.role}</dt>
-              <dd>{project.role}</dd>
-            </div>
-          )}
           <div>
             <dt>{t.stack}</dt>
             <dd>{project.stack.join(", ")}</dd>
           </div>
         </dl>
 
-        <p className="modal-description">{project.description}</p>
-
-        {project.problem && (
-          <>
-            <h3>{t.problem}</h3>
-            <p>{project.problem}</p>
-          </>
-        )}
+        <h3>{t.problem}</h3>
+        <p>{project.problem}</p>
 
         <h3>{t.features}</h3>
         <ul>
@@ -131,16 +119,13 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
           ))}
         </ul>
 
-        {project.notes.length > 0 && (
-          <>
-            <h3>{t.notes}</h3>
-            <ul>
-              {project.notes.map((note) => (
-                <li key={note}>{note}</li>
-              ))}
-            </ul>
-          </>
-        )}
+        <h3>{t.contribution}</h3>
+        {project.role && <p className="modal-role">{project.role}</p>}
+        <ul>
+          {project.contributions.map((item) => (
+            <li key={item}>{item}</li>
+          ))}
+        </ul>
 
         <div className="entry-links">
           {project.demoUrl && (

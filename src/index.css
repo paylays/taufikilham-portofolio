@@ -611,8 +611,9 @@ html:not(.dark) .reveal-cover {
   color: var(--text-strong);
 }
 
-.modal-description {
-  margin-top: 1.25rem;
+.modal-role {
+  margin-bottom: 0.3rem;
+  color: var(--text-dim);
 }
 
 .modal ul {
