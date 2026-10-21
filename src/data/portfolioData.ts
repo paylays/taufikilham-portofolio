@@ -20,10 +20,9 @@ export interface Project {
   isAward?: boolean;
   summary: string;
   role?: string;
-  description: string;
-  problem?: string;
+  problem: string;
   features: string[];
-  notes: string[];
+  contributions: string[];
   stack: string[];
   image?: string;
   demoUrl?: string;
@@ -74,10 +73,9 @@ interface ProjectSource {
   isAward?: boolean;
   summary: Text;
   role?: Text;
-  description: Text;
-  problem?: Text;
+  problem: Text;
   features: TextList;
-  notes: TextList;
+  contributions: TextList;
   stack: string[];
   image?: string;
   demoUrl?: string;
@@ -98,13 +96,9 @@ const PROJECTS: ProjectSource[] = [
       en: "Frontend (React) and API integration, in a team",
       id: "Frontend (React) dan integrasi API, dalam tim",
     },
-    description: {
-      en: "A monitoring platform for the fuel ratio (FR) of mining contractors, based on Kideco's standard operating parameters (SPO). It explains why the fuel ratio forecast ran over plan, checks contractor data against the SPO and simulates how operational changes would bring the ratio down. It won 2nd place in the hackathon category of the KIDECO Innovation Challenge 2026 (certificate No. 2618/IT10.1/AK.05/2026, PT Kideco Jaya Agung, Indika Energy Group).",
-      id: "Platform monitoring fuel ratio (FR) kontraktor tambang berbasis Standar Parameter Operasional (SPO) Kideco. Sistem ini menjelaskan penyebab forecast fuel ratio melebihi rencana, memvalidasi data kontraktor terhadap SPO, dan menyimulasikan dampak perubahan operasional terhadap penurunan rasio. Meraih Juara 2 kategori hackathon KIDECO Innovation Challenge 2026 (Sertifikat No. 2618/IT10.1/AK.05/2026, PT Kideco Jaya Agung, Indika Energy Group).",
-    },
     problem: {
-      en: "The mine's fuel ratio forecast was more than 17% over the annual plan, with no clear breakdown of the cause (low load on production equipment versus the number of support and dewatering units) and a risk of contractors over-claiming fuel.",
-      id: "Forecast fuel ratio operasional tambang membengkak lebih dari 17% dari rencana tahunan tanpa transparansi akar penyebab (low load alat produksi vs populasi unit support/dewatering), serta ada risiko klaim kelebihan konsumsi bahan bakar oleh kontraktor.",
+      en: "Kideco's case study for the KIDECO Innovation Challenge 2026 was about fuel. The contractors' fuel ratio, meaning the liters of fuel used for each cubic meter of material dug, was forecast to run more than 17% over the annual plan. It was not clear where the extra fuel went: to production machines working below their capacity, or to too many support machines and pumps that keep the pits dry. Without that answer, contractors could bill Kideco for more fuel than the work called for.",
+      id: "Studi kasus dari Kideco untuk KIDECO Innovation Challenge 2026 mengangkat masalah bahan bakar. Fuel ratio kontraktor, yaitu jumlah liter bahan bakar untuk setiap meter kubik material yang digali, diperkirakan lebih dari 17% di atas rencana tahunan. Tidak jelas ke mana kelebihan bahan bakar itu terpakai: oleh alat produksi yang bekerja di bawah kapasitasnya, atau oleh alat pendukung dan pompa penyedot air di lubang tambang yang jumlahnya terlalu banyak. Tanpa jawaban itu, kontraktor bisa menagih Kideco untuk bahan bakar yang melebihi kebutuhan pekerjaannya.",
     },
     features: {
       en: [
@@ -122,14 +116,14 @@ const PROJECTS: ProjectSource[] = [
         "Audit trail dan alur approval terkunci (draft, diajukan, disetujui Kideco) agar data yang sudah disetujui tidak bisa diubah",
       ],
     },
-    notes: {
+    contributions: {
       en: [
-        "The backend calculates the fuel ratio on the fly from 51,888+ rows of operational data in PostgreSQL instead of storing derived values.",
-        "My part was the React frontend and connecting it to the backend API.",
+        "Built the platform's React frontend, including the multi-contractor fuel ratio dashboard, the interactive simulator and the locked approval flow.",
+        "Connected the frontend to the team's backend API, which calculates the fuel ratio on the fly from 51,888+ rows of operational data in PostgreSQL instead of storing derived values.",
       ],
       id: [
-        "Backend menghitung fuel ratio secara langsung dari 51.888+ baris data operasional PostgreSQL tanpa menyimpan nilai turunan di database.",
-        "Bagian saya adalah frontend React dan integrasinya dengan API backend.",
+        "Membangun frontend React untuk platform ini, termasuk dashboard fuel ratio multi-kontraktor, simulator interaktif, dan alur approval terkunci.",
+        "Mengintegrasikan frontend dengan API backend tim, yang menghitung fuel ratio secara langsung dari 51.888+ baris data operasional PostgreSQL tanpa menyimpan nilai turunan di database.",
       ],
     },
     stack: ["React", "Node.js", "Express", "PostgreSQL"],
@@ -145,9 +139,9 @@ const PROJECTS: ProjectSource[] = [
       id: "Pemendek URL tanpa akun. Setiap link pendek dilengkapi kode QR dan halaman statistik privat.",
     },
     role: { en: "Solo, full stack", id: "Sendiri, full stack" },
-    description: {
-      en: "Stub turns a long web address into a short link and counts its clicks, with no sign-up. The stats for each link sit on a private page that opens through a secret link, shown once when the short link is created. The live site runs on Vercel with a Neon Postgres database.",
-      id: "Stub mengubah alamat web yang panjang menjadi link pendek dan mencatat jumlah kliknya, tanpa perlu mendaftar. Statistik tiap link ada di halaman privat yang dibuka lewat link rahasia, dan link rahasia itu hanya ditampilkan sekali saat link pendek dibuat. Versi publiknya berjalan di Vercel dengan database Neon Postgres.",
+    problem: {
+      en: "A long link is hard to share. It clutters a chat message, and anyone reading it on a poster or a presentation slide has to type it out by hand. Many link shorteners ask users to create an account first just to see the click count, and they collect more visitor data than counting clicks requires.",
+      id: "Link yang panjang sulit dibagikan. Di chat, link itu memenuhi pesan, dan orang yang melihatnya di poster atau slide presentasi harus mengetiknya ulang secara manual. Banyak layanan pemendek link meminta pengguna membuat akun dulu hanya untuk melihat jumlah klik, dan mengumpulkan data pengunjung lebih banyak daripada yang dibutuhkan untuk menghitung klik.",
     },
     features: {
       en: [
@@ -165,18 +159,18 @@ const PROJECTS: ProjectSource[] = [
         "Tema terang dan gelap yang mengikuti pengaturan perangkat, dengan tombol pengalih di header",
       ],
     },
-    notes: {
+    contributions: {
       en: [
-        "Stub shows the stats link once and stores only its SHA-256 hash, so a lost stats link cannot be recovered.",
-        "Stub stores no visitor IP addresses or raw user agents. Each visit keeps a timestamp, a hash that changes every day and differs per link, and labels for device, browser and OS.",
-        "Each IP address can create 20 new links per hour. Stub counts them in PostgreSQL against an HMAC of the IP instead of the address itself.",
-        "Tested with 128 unit and integration tests in Vitest and 7 end-to-end tests in Playwright. The integration tests run against a real PostgreSQL database.",
+        "Put each stats page behind a secret link that is shown once and stored only as a SHA-256 hash, so a lost stats link cannot be recovered.",
+        "Recorded each visit without the visitor's IP address or raw user agent, keeping only a timestamp, a hash that changes every day and differs per link, and labels for device, browser and OS.",
+        "Limited each IP address to 20 new links per hour, counted in PostgreSQL against an HMAC of the IP instead of the address itself.",
+        "Tested Stub with 128 unit and integration tests in Vitest, the integration tests running against a real PostgreSQL database, and 7 end-to-end tests in Playwright, then launched it on Vercel with a Neon Postgres database.",
       ],
       id: [
-        "Stub hanya menampilkan link statistik sekali dan menyimpan hash SHA-256-nya saja, jadi link statistik yang hilang tidak bisa dipulihkan.",
-        "Stub tidak menyimpan alamat IP maupun user agent mentah milik pengunjung. Setiap kunjungan hanya mencatat waktu, hash yang berganti setiap hari dan berbeda untuk tiap link, serta label perangkat, browser, dan sistem operasi.",
-        "Setiap alamat IP bisa membuat 20 link baru per jam. Batas ini dihitung di PostgreSQL memakai HMAC dari alamat IP, bukan alamat aslinya.",
-        "Diuji dengan 128 tes unit dan integrasi di Vitest serta 7 tes end-to-end di Playwright. Tes integrasinya berjalan di database PostgreSQL sungguhan.",
+        "Menempatkan setiap halaman statistik di balik link rahasia yang hanya ditampilkan sekali dan disimpan sebagai hash SHA-256 saja, sehingga link statistik yang hilang tidak bisa dipulihkan.",
+        "Mencatat setiap kunjungan tanpa alamat IP maupun user agent mentah milik pengunjung, hanya waktu, hash yang berganti setiap hari dan berbeda untuk tiap link, serta label perangkat, browser, dan sistem operasi.",
+        "Membatasi setiap alamat IP hingga 20 link baru per jam, yang dihitung di PostgreSQL memakai HMAC dari alamat IP, bukan alamat aslinya.",
+        "Menguji Stub dengan 128 tes unit dan integrasi di Vitest, dengan tes integrasi yang berjalan di database PostgreSQL sungguhan, serta 7 tes end-to-end di Playwright, lalu merilisnya di Vercel dengan database Neon Postgres.",
       ],
     },
     stack: ["Next.js", "TypeScript", "PostgreSQL", "Drizzle ORM"],
@@ -193,38 +187,38 @@ const PROJECTS: ProjectSource[] = [
       id: "Sistem antrean real-time untuk satu lokasi di jaringan lokal. Pengunjung mengambil nomor lewat kode QR, lalu nomornya dipanggil dengan suara di TV.",
     },
     role: { en: "Solo, full stack", id: "Sendiri, full stack" },
-    description: {
-      en: "Giliran manages the queue at one venue and runs from a single PC on the local network. Visitors take a number by scanning a QR code, then follow their ticket on their phone. A TV in the waiting room announces each call in Indonesian, while staff work through the queue from a counter panel. The admin defines the services and counters, so the same system works for any type of business. Visitors never give a name or phone number, and the system keeps no personal data about them.",
-      id: "Giliran mengelola antrean di satu lokasi dan berjalan dari satu PC di jaringan lokal. Pengunjung mengambil nomor dengan memindai kode QR, lalu memantau tiketnya di ponsel. TV di ruang tunggu mengumumkan setiap panggilan dalam bahasa Indonesia, sementara petugas melayani antrean dari panel loket. Layanan dan loket diatur oleh admin, sehingga sistem yang sama bisa dipakai untuk jenis usaha apa pun. Pengunjung tidak perlu memberikan nama atau nomor ponsel, dan sistem tidak menyimpan data pribadi mereka.",
+    problem: {
+      en: "At a clinic, a service office or a ticket counter, visitors usually wait with a paper number in hand. They have to keep watching the number board or listening for each call so they do not miss their turn, and they cannot tell how many people are still ahead of them. Online queue apps that alert visitors on their phone exist, but they often depend on the internet and ask for a phone or WhatsApp number.",
+      id: "Di klinik, kantor layanan, atau loket, pengunjung biasanya menunggu sambil memegang nomor kertas. Mereka harus terus memperhatikan papan nomor atau menyimak setiap panggilan agar gilirannya tidak terlewat, tanpa tahu berapa orang lagi di depannya. Aplikasi antrean online yang memberi kabar lewat ponsel memang ada, tetapi sering bergantung pada internet dan meminta nomor HP atau WhatsApp pengunjung.",
     },
     features: {
       en: [
-        "Live ticket on the visitor's phone that shows how many people are ahead and alerts them when their turn is near",
+        "Live ticket on the visitor's phone that shows how many people are ahead and alerts them when their turn is near, while the ticket page is open",
         "TV display with the latest call, every counter, recent calls and the number of people waiting per service, with each call spoken in Indonesian",
         "Counter panel where staff call the next number, recall it, skip it or mark it done",
         "Admin pages for services, counters and staff accounts, plus a QR poster sized for A4 printing",
         "Optional Wi-Fi QR code on the poster and the TV, so visitors join the venue's Wi-Fi before they take a number",
       ],
       id: [
-        "Tiket di ponsel yang diperbarui otomatis, menampilkan sisa antrean di depan, dan memberi tahu saat giliran hampir tiba",
+        "Tiket di ponsel yang diperbarui otomatis, menampilkan sisa antrean di depan, dan memberi tahu saat giliran hampir tiba, selama halaman tiket terbuka",
         "Layar TV berisi panggilan terbaru, semua loket, panggilan sebelumnya, dan jumlah orang yang menunggu di tiap layanan, dengan panggilan bersuara dalam bahasa Indonesia",
         "Panel loket untuk memanggil nomor berikutnya, memanggil ulang, melewati, atau menyelesaikan nomor",
         "Halaman admin untuk mengatur layanan, loket, dan akun petugas, serta poster QR ukuran A4 yang siap dicetak",
         "Kode QR Wi-Fi opsional di poster dan layar TV, agar pengunjung tersambung ke Wi-Fi tempat itu sebelum mengambil nomor",
       ],
     },
-    notes: {
+    contributions: {
       en: [
-        "One Node 24 process runs the Hono API, serves the React app and pushes each change to phones, the TV and counter panels with Server-Sent Events.",
-        "Data sits in one SQLite file through Node's built-in node:sqlite module. Each service keeps a separate number sequence per day, so numbers restart at midnight in the business timezone on their own.",
-        "Tested with 94 unit and integration tests in Vitest and 4 end-to-end tests in Playwright, including a visitor, a counter and the TV staying in sync.",
-        "It runs only on a local network over plain HTTP, so there is no public demo, and phone alerts work only while the ticket page is open.",
+        "Built Giliran as one Node 24 process that runs the Hono API, serves the React app and pushes every change to phones, the TV and counter panels with Server-Sent Events.",
+        "Stored everything in one SQLite file through Node's built-in node:sqlite module, with no personal data about visitors and a separate number sequence for each service per day that restarts at midnight in the business's timezone.",
+        "Designed it to run from a single PC on the venue's local network, with no cloud service.",
+        "Tested it with 94 unit and integration tests in Vitest and 4 end-to-end tests in Playwright, including a visitor, a counter and the TV staying in sync.",
       ],
       id: [
-        "Satu proses Node 24 menjalankan API Hono, menyajikan aplikasi React, dan mengirim setiap perubahan ke ponsel, TV, dan panel loket lewat Server-Sent Events.",
-        "Data disimpan dalam satu file SQLite melalui modul bawaan node:sqlite. Setiap layanan punya urutan nomor sendiri per hari, sehingga nomor otomatis mulai dari awal setiap tengah malam sesuai zona waktu tempat usaha.",
-        "Diuji dengan 94 tes unit dan integrasi di Vitest serta 4 tes end-to-end di Playwright, termasuk sinkronisasi antara pengunjung, loket, dan TV.",
-        "Hanya berjalan di jaringan lokal dengan HTTP biasa, jadi tidak ada demo publik, dan pemberitahuan di ponsel hanya muncul selama halaman tiket terbuka.",
+        "Membangun Giliran sebagai satu proses Node 24 yang menjalankan API Hono, menyajikan aplikasi React, dan mengirim setiap perubahan ke ponsel, TV, dan panel loket lewat Server-Sent Events.",
+        "Menyimpan seluruh data dalam satu file SQLite melalui modul bawaan node:sqlite, tanpa data pribadi pengunjung, dengan urutan nomor sendiri untuk tiap layanan per hari yang otomatis mulai dari awal setiap tengah malam sesuai zona waktu tempat usaha.",
+        "Merancang sistem agar berjalan dari satu PC di jaringan lokal tempat usaha, tanpa layanan cloud.",
+        "Menguji sistem dengan 94 tes unit dan integrasi di Vitest serta 4 tes end-to-end di Playwright, termasuk sinkronisasi antara pengunjung, loket, dan TV.",
       ],
     },
     stack: ["TypeScript", "React", "Hono", "SQLite"],
@@ -240,13 +234,9 @@ const PROJECTS: ProjectSource[] = [
       id: "Sistem manajemen kerja praktik Prodi Sistem Informasi ITK, digunakan 40 sampai 60 mahasiswa per periode.",
     },
     role: { en: "Solo, full stack", id: "Sendiri, full stack" },
-    description: {
-      en: "My thesis project. It replaces a manual internship process spread across Google Sheets, Google Forms and Google Classroom with one system for submissions, document checks, supervisor assignment, monitoring and grading. It serves four roles: program coordinator, academic staff, lecturers and students. I built it using the Extreme Programming method.",
-      id: "Proyek skripsi saya. Sistem ini menggantikan proses kerja praktik manual yang tersebar di Google Spreadsheet, Google Form, dan Google Classroom menjadi satu sistem untuk pengajuan, verifikasi dokumen, penentuan dosen pembimbing, monitoring, dan penilaian. Ada empat peran pengguna: koordinator prodi, tendik, dosen, dan mahasiswa. Dikembangkan dengan metode Extreme Programming.",
-    },
     problem: {
-      en: "Internship administration was manual and slow, split across three platforms, and student progress was hard to monitor.",
-      id: "Administrasi kerja praktik masih manual dan memakan waktu, tersebar di tiga platform berbeda, dan progres mahasiswa sulit dipantau.",
+      en: "In ITK's Information Systems program, the internship process was run by hand and spread across Google Sheets, Google Forms and Google Classroom. Getting each student's internship from submission to grading took a long time, and with the records split across three platforms, it was hard to see where a student stood.",
+      id: "Di Prodi Sistem Informasi ITK, proses kerja praktik masih dikerjakan secara manual dan tersebar di Google Spreadsheet, Google Form, dan Google Classroom. Mengurus kerja praktik setiap mahasiswa dari pengajuan sampai penilaian memakan waktu lama, dan karena datanya terpisah di tiga platform, progres mahasiswa sulit dipantau.",
     },
     features: {
       en: [
@@ -262,14 +252,16 @@ const PROJECTS: ProjectSource[] = [
         "Notifikasi status pengajuan dan ekspor rekap data",
       ],
     },
-    notes: {
+    contributions: {
       en: [
-        "Role-based access control for the four user roles",
-        "A relational schema designed to keep submission data consistent",
+        "Developed INTERSI-ITK as my thesis project using the Extreme Programming method, bringing the whole internship process into one system, from submissions and document checks to supervisor assignment, monitoring and grading.",
+        "Set up role-based access control (RBAC) for the four user roles: program coordinator, administrative staff, lecturers and students.",
+        "Designed a relational database schema that keeps submission data consistent.",
       ],
       id: [
-        "Otorisasi berbasis peran (RBAC) untuk keempat peran pengguna",
-        "Skema basis data relasional yang menjaga konsistensi data pengajuan",
+        "Mengembangkan INTERSI-ITK sebagai proyek skripsi dengan metode Extreme Programming, menyatukan seluruh alur kerja praktik dalam satu sistem, mulai dari pengajuan dan verifikasi berkas hingga penentuan dosen pembimbing, monitoring, dan penilaian.",
+        "Menerapkan otorisasi berbasis peran (RBAC) untuk empat peran pengguna: koordinator prodi, tendik, dosen, dan mahasiswa.",
+        "Merancang skema basis data relasional yang menjaga konsistensi data pengajuan.",
       ],
     },
     stack: ["Laravel", "Vue", "Inertia.js", "MySQL"],
@@ -286,13 +278,9 @@ const PROJECTS: ProjectSource[] = [
       id: "Pengajuan surat dan administrasi RT 36 Wonorejo, digunakan oleh 200+ warga.",
     },
     role: { en: "Solo, full stack", id: "Sendiri, full stack" },
-    description: {
-      en: "A self-service site for residents of RT 36 Wonorejo, Balikpapan. Residents request cover letters online, read announcements and see how the neighborhood fund is used, without visiting the head of the RT in person.",
-      id: "Layanan mandiri untuk warga RT 36 Wonorejo, Balikpapan. Warga dapat mengajukan surat pengantar secara online, membaca pengumuman, dan melihat penggunaan kas RT tanpa harus datang ke rumah Ketua RT.",
-    },
     problem: {
-      en: "Residents had to visit the head of the RT in person to get a cover letter or hear about announcements.",
-      id: "Warga kesulitan mendapatkan informasi pengumuman dan surat pengantar secara cepat tanpa harus datang langsung ke rumah Ketua RT.",
+      en: "In RT 36 Wonorejo, a neighborhood unit in Balikpapan, residents had to visit the head of the RT at home to get a cover letter for their official paperwork. News from the RT was also hard to get without stopping by, so announcements reached residents slowly.",
+      id: "Di RT 36 Wonorejo, Balikpapan, warga yang membutuhkan surat pengantar untuk mengurus administrasi harus datang langsung ke rumah Ketua RT. Informasi pengumuman juga sulit didapat tanpa datang ke sana, sehingga kabar dari RT lambat sampai ke warga.",
     },
     features: {
       en: [
@@ -308,9 +296,15 @@ const PROJECTS: ProjectSource[] = [
         "Tampilan yang nyaman di ponsel",
       ],
     },
-    notes: {
-      en: ["An interface simple enough for residents of every age"],
-      id: ["Antarmuka yang sederhana agar mudah digunakan warga dari berbagai usia"],
+    contributions: {
+      en: [
+        "Developed SI-RT as a full-stack Laravel and MySQL site that residents of RT 36 Wonorejo use to request cover letters, read announcements and see how the RT's cash is spent.",
+        "Designed an interface simple enough for residents of every age, with a layout that works on phones.",
+      ],
+      id: [
+        "Mengembangkan SI-RT secara full stack dengan Laravel dan MySQL sebagai layanan mandiri bagi warga RT 36 Wonorejo untuk mengajukan surat pengantar, membaca pengumuman, dan melihat penggunaan kas RT.",
+        "Merancang antarmuka yang sederhana agar mudah digunakan warga dari berbagai usia, dengan tampilan yang nyaman di ponsel.",
+      ],
     },
     stack: ["Laravel", "PHP", "MySQL"],
     image: rt36Img,
@@ -326,13 +320,9 @@ const PROJECTS: ProjectSource[] = [
       id: "Direktori terpusat destinasi wisata Kota Balikpapan, dibangun saat magang.",
     },
     role: { en: "Solo, full stack", id: "Sendiri, full stack" },
-    description: {
-      en: "A full-stack prototype I built during my internship at Dinas Pemuda Olahraga dan Pariwisata Kota Balikpapan, from requirements analysis to deployment. It collects nature, culinary and cultural spots, public facilities and events on one site with a map, for residents and tourists.",
-      id: "Prototipe full-stack yang saya bangun saat magang di Dinas Pemuda Olahraga dan Pariwisata Kota Balikpapan, dari analisis kebutuhan hingga deployment. Situs ini mengumpulkan wisata alam, kuliner, budaya, fasilitas umum, dan acara dalam satu tempat dengan peta, untuk warga dan wisatawan.",
-    },
     problem: {
-      en: "The agency's tourism guidebook only existed in print and did not reach the whole city, so residents and tourists had no single place to find information about destinations in Balikpapan.",
-      id: "Buku panduan wisata dinas hanya tersedia dalam bentuk cetak dan tidak menjangkau seluruh kota, sehingga warga dan wisatawan tidak memiliki satu sumber informasi terpusat tentang destinasi wisata di Balikpapan.",
+      en: "The tourism guidebook from Balikpapan's agency for youth, sports and tourism existed only in print, and the copies did not reach the whole city. Residents and tourists who wanted to know where to go in Balikpapan had no single place to look it up.",
+      id: "Buku panduan wisata milik Dinas Pemuda Olahraga dan Pariwisata Kota Balikpapan hanya tersedia dalam bentuk cetak, dan tidak menjangkau seluruh kota. Warga dan wisatawan yang ingin berwisata di Balikpapan tidak punya satu tempat untuk mencari informasi tentang destinasinya.",
     },
     features: {
       en: [
@@ -348,9 +338,15 @@ const PROJECTS: ProjectSource[] = [
         "CMS admin untuk memperbarui data destinasi dan acara",
       ],
     },
-    notes: {
-      en: ["Integrating a map API and keeping high-resolution destination photos quick to load"],
-      id: ["Mengintegrasikan API peta dan mengoptimalkan pemuatan foto destinasi beresolusi tinggi"],
+    contributions: {
+      en: [
+        "Built SITA-BPP as a full-stack prototype during my internship at Dinas Pemuda Olahraga dan Pariwisata Kota Balikpapan, from requirements analysis to deployment.",
+        "Integrated a map API for the interactive map with directions, and optimized the loading of high-resolution destination photos.",
+      ],
+      id: [
+        "Membangun SITA-BPP sebagai prototipe full-stack saat magang di Dinas Pemuda Olahraga dan Pariwisata Kota Balikpapan, mulai dari analisis kebutuhan hingga deployment.",
+        "Mengintegrasikan API peta untuk peta interaktif dengan petunjuk arah, serta mengoptimalkan pemuatan foto destinasi beresolusi tinggi.",
+      ],
     },
     stack: ["React", "Node.js", "Express", "MySQL"],
     image: pariwisataImg,
@@ -368,9 +364,9 @@ const PROJECTS: ProjectSource[] = [
       en: "Backend and database (Flask, PostgreSQL), in a team",
       id: "Backend dan basis data (Flask, PostgreSQL), dalam tim",
     },
-    description: {
-      en: "A web app for booking hotel rooms online. Guests choose check-in and check-out dates and the number of guests, then see which rooms are available. Built as the major assignment for the Cloud Computing course over about half a semester.",
-      id: "Aplikasi web untuk memesan kamar hotel secara online. Tamu memilih tanggal check-in, check-out, dan jumlah tamu, lalu melihat kamar yang tersedia. Dibuat sebagai tugas besar mata kuliah Cloud Computing selama kurang lebih setengah semester.",
+    problem: {
+      en: "When a hotel has no online booking, a guest has to call or send a message, then wait for staff to check which rooms are still free for the dates and number of guests they asked for. Until staff reply, the guest does not know whether there is a room at all.",
+      id: "Jika hotel tidak menyediakan reservasi online, tamu harus menelepon atau mengirim pesan, lalu menunggu petugas mengecek kamar mana yang masih tersedia untuk tanggal dan jumlah tamu yang ia minta. Sebelum petugas membalas, tamu belum tahu apakah masih ada kamar untuknya.",
     },
     features: {
       en: [
@@ -384,7 +380,16 @@ const PROJECTS: ProjectSource[] = [
         "Pengecekan ketersediaan kamar",
       ],
     },
-    notes: { en: [], id: [] },
+    contributions: {
+      en: [
+        "Built the backend with Flask and the database with PostgreSQL, as part of the team's major assignment for the Cloud Computing course, which took about half a semester.",
+        "Worked on the backend side of booking, where guests choose check-in and check-out dates and the number of guests, then see which rooms are available.",
+      ],
+      id: [
+        "Membangun backend dengan Flask dan basis data dengan PostgreSQL sebagai bagian dari tugas besar tim untuk mata kuliah Cloud Computing, yang dikerjakan selama kurang lebih setengah semester.",
+        "Mengerjakan sisi backend untuk alur pemesanan, tempat tamu memilih tanggal check-in, check-out, dan jumlah tamu, lalu melihat kamar yang tersedia.",
+      ],
+    },
     stack: ["React", "Vite", "Flask", "PostgreSQL"],
     githubUrl: "https://github.com/paylays/myhotel",
   },
@@ -438,12 +443,12 @@ const WORK: ExperienceSource[] = [
     highlights: {
       en: [
         "Assisted the course across its 16 weeks",
-        "Guided students in writing software requirements (SKPL) and design specifications (DPPL)",
+        "Helped manage the SKPL, DPPL, DUPL and DLPA software documents",
         "Coached students on development methodologies and UML-based analysis",
       ],
       id: [
         "Mendampingi perkuliahan selama 16 minggu",
-        "Membimbing mahasiswa menyusun Spesifikasi Kebutuhan Perangkat Lunak (SKPL) dan Deskripsi Perancangan Perangkat Lunak (DPPL)",
+        "Membantu mengurus dokumen SKPL, DPPL, DUPL, dan DLPA",
         "Membimbing penerapan metodologi pengembangan perangkat lunak dan analisis berbasis UML",
       ],
     },
@@ -647,10 +652,9 @@ export const getPortfolioData = (lang: Language) => ({
       isAward: p.isAward,
       summary: p.summary[lang],
       role: p.role?.[lang],
-      description: p.description[lang],
-      problem: p.problem?.[lang],
+      problem: p.problem[lang],
       features: p.features[lang],
-      notes: p.notes[lang],
+      contributions: p.contributions[lang],
       stack: p.stack,
       image: p.image,
       demoUrl: p.demoUrl,
