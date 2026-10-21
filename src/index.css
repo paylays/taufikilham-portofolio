@@ -470,6 +470,10 @@ html:not(.dark) .reveal-cover {
   color: var(--text);
 }
 
+.stack-item {
+  white-space: nowrap;
+}
+
 /* ── Footer ───────────────────────────────────────── */
 
 /* The bottom padding keeps the last line clear of the scroll meter */
@@ -579,6 +583,10 @@ html:not(.dark) .reveal-cover {
   border-radius: 6px;
 }
 
+.modal-image img {
+  object-position: top;
+}
+
 .modal-facts {
   display: grid;
   gap: 0.25rem;
@@ -610,6 +618,11 @@ html:not(.dark) .reveal-cover {
 .modal ul {
   list-style: disc;
   padding-left: 1.25rem;
+}
+
+.modal p,
+.modal li {
+  text-wrap: pretty;
 }
 
 .modal li + li {

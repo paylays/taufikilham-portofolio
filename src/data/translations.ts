@@ -30,7 +30,7 @@ export const TRANSLATIONS = {
     },
     projects: {
       title: "Projects",
-      desc: "Open a case study for the problem, features and technical notes.",
+      desc: "Open a case study to see what each project does and how it was built.",
       caseStudy: "Case study",
       live: "Live site",
       code: "Code",
@@ -103,7 +103,7 @@ export const TRANSLATIONS = {
     },
     projects: {
       title: "Proyek",
-      desc: "Buka studi kasus untuk melihat masalah, fitur, dan catatan teknisnya.",
+      desc: "Buka studi kasus untuk melihat apa yang dikerjakan setiap proyek dan bagaimana proyek itu dibangun.",
       caseStudy: "Studi kasus",
       live: "Situs",
       code: "Kode",

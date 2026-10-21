@@ -2,6 +2,8 @@ import intersiImg from "../assets/projects/Login - INTERSI.png";
 import rt36Img from "../assets/projects/Landing - Website Administrasi RT.36.png";
 import pariwisataImg from "../assets/projects/Explore More Pariwisata Balikpapan.png";
 import kidecoMatrixImg from "../assets/projects/Dashboard - Kideco Matrix.png";
+import stubImg from "../assets/projects/Home - Stub.png";
+import giliranImg from "../assets/projects/Display - Giliran.png";
 import cvPdf from "../assets/Taufik-Ilham-CV-EN.pdf";
 import avatarImg from "../assets/profile-avatar.webp";
 import type { Language } from "../context/LanguageContext";
@@ -133,6 +135,101 @@ const PROJECTS: ProjectSource[] = [
     stack: ["React", "Node.js", "Express", "PostgreSQL"],
     image: kidecoMatrixImg,
     githubUrl: "https://github.com/paylays/initial_d",
+  },
+  {
+    id: "stub",
+    title: "Stub",
+    tag: { en: "Personal project", id: "Proyek pribadi" },
+    summary: {
+      en: "A URL shortener that needs no account. Each short link comes with a QR code and a private stats page.",
+      id: "Pemendek URL tanpa akun. Setiap link pendek dilengkapi kode QR dan halaman statistik privat.",
+    },
+    role: { en: "Solo, full stack", id: "Sendiri, full stack" },
+    description: {
+      en: "Stub turns a long web address into a short link and counts its clicks, with no sign-up. The stats for each link sit on a private page that opens through a secret link, shown once when the short link is created. The live site runs on Vercel with a Neon Postgres database.",
+      id: "Stub mengubah alamat web yang panjang menjadi link pendek dan mencatat jumlah kliknya, tanpa perlu mendaftar. Statistik tiap link ada di halaman privat yang dibuka lewat link rahasia, dan link rahasia itu hanya ditampilkan sekali saat link pendek dibuat. Versi publiknya berjalan di Vercel dengan database Neon Postgres.",
+    },
+    features: {
+      en: [
+        "7-character short links for most http and https addresses",
+        "Optional expiry date, with a clear notice for visitors once the link has expired",
+        "QR code for each short link, downloadable as a PNG",
+        "Private stats page with clicks and unique visitors per day for the last 30 days, plus breakdowns by device, browser and operating system",
+        "Light and dark themes that follow the device setting, with a switch in the header",
+      ],
+      id: [
+        "Link pendek 7 karakter untuk sebagian besar alamat http dan https",
+        "Tanggal kedaluwarsa opsional, dengan pemberitahuan yang jelas untuk pengunjung setelah link tidak berlaku lagi",
+        "Kode QR untuk setiap link pendek, bisa diunduh dalam format PNG",
+        "Halaman statistik privat berisi klik dan pengunjung unik per hari selama 30 hari terakhir, serta rincian per perangkat, browser, dan sistem operasi",
+        "Tema terang dan gelap yang mengikuti pengaturan perangkat, dengan tombol pengalih di header",
+      ],
+    },
+    notes: {
+      en: [
+        "Stub shows the stats link once and stores only its SHA-256 hash, so a lost stats link cannot be recovered.",
+        "Stub stores no visitor IP addresses or raw user agents. Each visit keeps a timestamp, a hash that changes every day and differs per link, and labels for device, browser and OS.",
+        "Each IP address can create 20 new links per hour. Stub counts them in PostgreSQL against an HMAC of the IP instead of the address itself.",
+        "Tested with 128 unit and integration tests in Vitest and 7 end-to-end tests in Playwright. The integration tests run against a real PostgreSQL database.",
+      ],
+      id: [
+        "Stub hanya menampilkan link statistik sekali dan menyimpan hash SHA-256-nya saja, jadi link statistik yang hilang tidak bisa dipulihkan.",
+        "Stub tidak menyimpan alamat IP maupun user agent mentah milik pengunjung. Setiap kunjungan hanya mencatat waktu, hash yang berganti setiap hari dan berbeda untuk tiap link, serta label perangkat, browser, dan sistem operasi.",
+        "Setiap alamat IP bisa membuat 20 link baru per jam. Batas ini dihitung di PostgreSQL memakai HMAC dari alamat IP, bukan alamat aslinya.",
+        "Diuji dengan 128 tes unit dan integrasi di Vitest serta 7 tes end-to-end di Playwright. Tes integrasinya berjalan di database PostgreSQL sungguhan.",
+      ],
+    },
+    stack: ["Next.js", "TypeScript", "PostgreSQL", "Drizzle ORM"],
+    image: stubImg,
+    demoUrl: "https://stub-link.vercel.app",
+    githubUrl: "https://github.com/paylays/stub-link",
+  },
+  {
+    id: "giliran",
+    title: "Giliran",
+    tag: { en: "Personal project", id: "Proyek pribadi" },
+    summary: {
+      en: "A real-time queue system for one venue on a local network. Visitors take a number with a QR code, and a TV calls it out loud.",
+      id: "Sistem antrean real-time untuk satu lokasi di jaringan lokal. Pengunjung mengambil nomor lewat kode QR, lalu nomornya dipanggil dengan suara di TV.",
+    },
+    role: { en: "Solo, full stack", id: "Sendiri, full stack" },
+    description: {
+      en: "Giliran manages the queue at one venue and runs from a single PC on the local network. Visitors take a number by scanning a QR code, then follow their ticket on their phone. A TV in the waiting room announces each call in Indonesian, while staff work through the queue from a counter panel. The admin defines the services and counters, so the same system works for any type of business. Visitors never give a name or phone number, and the system keeps no personal data about them.",
+      id: "Giliran mengelola antrean di satu lokasi dan berjalan dari satu PC di jaringan lokal. Pengunjung mengambil nomor dengan memindai kode QR, lalu memantau tiketnya di ponsel. TV di ruang tunggu mengumumkan setiap panggilan dalam bahasa Indonesia, sementara petugas melayani antrean dari panel loket. Layanan dan loket diatur oleh admin, sehingga sistem yang sama bisa dipakai untuk jenis usaha apa pun. Pengunjung tidak perlu memberikan nama atau nomor ponsel, dan sistem tidak menyimpan data pribadi mereka.",
+    },
+    features: {
+      en: [
+        "Live ticket on the visitor's phone that shows how many people are ahead and alerts them when their turn is near",
+        "TV display with the latest call, every counter, recent calls and the number of people waiting per service, with each call spoken in Indonesian",
+        "Counter panel where staff call the next number, recall it, skip it or mark it done",
+        "Admin pages for services, counters and staff accounts, plus a QR poster sized for A4 printing",
+        "Optional Wi-Fi QR code on the poster and the TV, so visitors join the venue's Wi-Fi before they take a number",
+      ],
+      id: [
+        "Tiket di ponsel yang diperbarui otomatis, menampilkan sisa antrean di depan, dan memberi tahu saat giliran hampir tiba",
+        "Layar TV berisi panggilan terbaru, semua loket, panggilan sebelumnya, dan jumlah orang yang menunggu di tiap layanan, dengan panggilan bersuara dalam bahasa Indonesia",
+        "Panel loket untuk memanggil nomor berikutnya, memanggil ulang, melewati, atau menyelesaikan nomor",
+        "Halaman admin untuk mengatur layanan, loket, dan akun petugas, serta poster QR ukuran A4 yang siap dicetak",
+        "Kode QR Wi-Fi opsional di poster dan layar TV, agar pengunjung tersambung ke Wi-Fi tempat itu sebelum mengambil nomor",
+      ],
+    },
+    notes: {
+      en: [
+        "One Node 24 process runs the Hono API, serves the React app and pushes each change to phones, the TV and counter panels with Server-Sent Events.",
+        "Data sits in one SQLite file through Node's built-in node:sqlite module. Each service keeps a separate number sequence per day, so numbers restart at midnight in the business timezone on their own.",
+        "Tested with 94 unit and integration tests in Vitest and 4 end-to-end tests in Playwright, including a visitor, a counter and the TV staying in sync.",
+        "It runs only on a local network over plain HTTP, so there is no public demo, and phone alerts work only while the ticket page is open.",
+      ],
+      id: [
+        "Satu proses Node 24 menjalankan API Hono, menyajikan aplikasi React, dan mengirim setiap perubahan ke ponsel, TV, dan panel loket lewat Server-Sent Events.",
+        "Data disimpan dalam satu file SQLite melalui modul bawaan node:sqlite. Setiap layanan punya urutan nomor sendiri per hari, sehingga nomor otomatis mulai dari awal setiap tengah malam sesuai zona waktu tempat usaha.",
+        "Diuji dengan 94 tes unit dan integrasi di Vitest serta 4 tes end-to-end di Playwright, termasuk sinkronisasi antara pengunjung, loket, dan TV.",
+        "Hanya berjalan di jaringan lokal dengan HTTP biasa, jadi tidak ada demo publik, dan pemberitahuan di ponsel hanya muncul selama halaman tiket terbuka.",
+      ],
+    },
+    stack: ["TypeScript", "React", "Hono", "SQLite"],
+    image: giliranImg,
+    githubUrl: "https://github.com/paylays/giliran",
   },
   {
     id: "intersi",
@@ -524,19 +621,19 @@ const CREDENTIALS: {
 const STACK: { label: Text; items: string[] }[] = [
   {
     label: { en: "Frontend", id: "Frontend" },
-    items: ["HTML", "CSS", "React", "Next.js", "Vue", "Inertia.js", "Vite", "Tailwind CSS"],
+    items: ["HTML", "CSS", "TypeScript", "React", "Next.js", "Vue", "Inertia.js", "Vite", "Tailwind CSS"],
   },
   {
     label: { en: "Backend", id: "Backend" },
-    items: ["Node.js (Express)", "Laravel (PHP)", "Python (Flask, FastAPI)", "REST APIs"],
+    items: ["Node.js (Express, Hono)", "Laravel (PHP)", "Python (Flask, FastAPI)", "REST APIs"],
   },
   {
     label: { en: "Databases", id: "Basis data" },
-    items: ["MySQL", "PostgreSQL", "MongoDB", "Firebase Firestore", "Supabase"],
+    items: ["MySQL", "PostgreSQL", "SQLite", "MongoDB", "Firebase Firestore", "Supabase", "Neon", "Drizzle ORM"],
   },
   {
     label: { en: "Tools", id: "Tools" },
-    items: ["Git", "GitHub", "GitHub Actions", "Docker", "Postman", "Figma", "Google Cloud Platform"],
+    items: ["Git", "GitHub", "GitHub Actions", "Docker", "Postman", "Figma", "Google Cloud Platform", "Vercel"],
   },
 ];
 
