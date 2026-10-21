@@ -611,11 +611,6 @@ html:not(.dark) .reveal-cover {
   color: var(--text-strong);
 }
 
-.modal-role {
-  margin-bottom: 0.3rem;
-  color: var(--text-dim);
-}
-
 .modal ul {
   list-style: disc;
   padding-left: 1.25rem;
