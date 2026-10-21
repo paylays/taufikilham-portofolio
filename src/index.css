@@ -9,7 +9,7 @@
   --border: #e6e6e6;
   --chip-bg: #f3f3f3;
 
-  /* Barca blue is the accent; garnet only marks awards (see DESIGN.md) */
+  /* Barca blue is the accent; garnet only marks awards */
   --color-blue: #004d98;
   --color-garnet: #a50044;
   /* Accent colors for text; dark mode lightens them to keep 4.5:1 */

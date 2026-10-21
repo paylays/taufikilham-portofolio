@@ -11,6 +11,9 @@ node_modules
 dist
 dist-ssr
 *.local
+.env
+.env.*
+!.env.example
 
 # Editor directories and files
 .vscode/*
@@ -23,5 +26,11 @@ dist-ssr
 *.sln
 *.sw?
 
-# Windows junction to .agents/skills/frontend-design, created by the skills CLI
-.claude/skills/frontend-design
+# Local working notes and editor tooling, kept out of the public repo
+CLAUDE.md
+.claude/
+.agents/
+skills-lock.json
+DESIGN.md
+docs/plan.md
+anti-slop/
