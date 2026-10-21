@@ -118,12 +118,14 @@ const PROJECTS: ProjectSource[] = [
     },
     contributions: {
       en: [
-        "Built the platform's React frontend, including the multi-contractor fuel ratio dashboard, the interactive simulator and the locked approval flow.",
-        "Connected the frontend to the team's backend API, which calculates the fuel ratio on the fly from 51,888+ rows of operational data in PostgreSQL instead of storing derived values.",
+        "Frontend Developer (built the fuel ratio monitoring dashboard, the simulator and the data approval flow).",
+        "Connected the app's screens to the backend system the team built, so contractors' operating data shows up on the dashboard.",
+        "Worked with the team to take 2nd place at the KIDECO Innovation Challenge 2026.",
       ],
       id: [
-        "Membangun frontend React untuk platform ini, termasuk dashboard fuel ratio multi-kontraktor, simulator interaktif, dan alur approval terkunci.",
-        "Mengintegrasikan frontend dengan API backend tim, yang menghitung fuel ratio secara langsung dari 51.888+ baris data operasional PostgreSQL tanpa menyimpan nilai turunan di database.",
+        "Frontend Developer (Pembuatan dashboard monitoring fuel ratio, simulator, dan alur persetujuan data).",
+        "Menghubungkan tampilan aplikasi dengan sistem backend yang dibuat tim, sehingga data operasional kontraktor tampil di dashboard.",
+        "Bekerja sama dengan tim hingga meraih Juara 2 di KIDECO Innovation Challenge 2026.",
       ],
     },
     stack: ["React", "Node.js", "Express", "PostgreSQL"],
@@ -161,16 +163,14 @@ const PROJECTS: ProjectSource[] = [
     },
     contributions: {
       en: [
-        "Put each stats page behind a secret link that is shown once and stored only as a SHA-256 hash, so a lost stats link cannot be recovered.",
-        "Recorded each visit without the visitor's IP address or raw user agent, keeping only a timestamp, a hash that changes every day and differs per link, and labels for device, browser and OS.",
-        "Limited each IP address to 20 new links per hour, counted in PostgreSQL against an HMAC of the IP instead of the address itself.",
-        "Tested Stub with 128 unit and integration tests in Vitest, the integration tests running against a real PostgreSQL database, and 7 end-to-end tests in Playwright, then launched it on Vercel with a Neon Postgres database.",
+        "Full Stack Developer (built the link shortener, QR codes and the click stats page).",
+        "Designed the app to store no visitor IP addresses, and to show click stats only on a private page.",
+        "Tested the app thoroughly before release and launched it live at stub-link.vercel.app.",
       ],
       id: [
-        "Menempatkan setiap halaman statistik di balik link rahasia yang hanya ditampilkan sekali dan disimpan sebagai hash SHA-256 saja, sehingga link statistik yang hilang tidak bisa dipulihkan.",
-        "Mencatat setiap kunjungan tanpa alamat IP maupun user agent mentah milik pengunjung, hanya waktu, hash yang berganti setiap hari dan berbeda untuk tiap link, serta label perangkat, browser, dan sistem operasi.",
-        "Membatasi setiap alamat IP hingga 20 link baru per jam, yang dihitung di PostgreSQL memakai HMAC dari alamat IP, bukan alamat aslinya.",
-        "Menguji Stub dengan 128 tes unit dan integrasi di Vitest, dengan tes integrasi yang berjalan di database PostgreSQL sungguhan, serta 7 tes end-to-end di Playwright, lalu merilisnya di Vercel dengan database Neon Postgres.",
+        "Full Stack Developer (Pembuatan pemendek link, kode QR, dan halaman statistik klik).",
+        "Merancang aplikasi agar tidak menyimpan alamat IP pengunjung, dengan statistik klik yang hanya tampil di halaman privat.",
+        "Menguji aplikasi secara menyeluruh sebelum dirilis dan meluncurkannya di stub-link.vercel.app.",
       ],
     },
     stack: ["Next.js", "TypeScript", "PostgreSQL", "Drizzle ORM"],
@@ -209,16 +209,14 @@ const PROJECTS: ProjectSource[] = [
     },
     contributions: {
       en: [
-        "Built Giliran as one Node 24 process that runs the Hono API, serves the React app and pushes every change to phones, the TV and counter panels with Server-Sent Events.",
-        "Stored everything in one SQLite file through Node's built-in node:sqlite module, with no personal data about visitors and a separate number sequence for each service per day that restarts at midnight in the business's timezone.",
-        "Designed it to run from a single PC on the venue's local network, with no cloud service.",
-        "Tested it with 94 unit and integration tests in Vitest and 4 end-to-end tests in Playwright, including a visitor, a counter and the TV staying in sync.",
+        "Full Stack Developer (built the phone ticket, the TV display with spoken calls, the counter panel and the admin pages).",
+        "Designed the system to run on the venue's own local network, with no cloud service and no personal data about visitors.",
+        "Tested the system thoroughly so the visitor's phone, the counter and the TV stay in sync.",
       ],
       id: [
-        "Membangun Giliran sebagai satu proses Node 24 yang menjalankan API Hono, menyajikan aplikasi React, dan mengirim setiap perubahan ke ponsel, TV, dan panel loket lewat Server-Sent Events.",
-        "Menyimpan seluruh data dalam satu file SQLite melalui modul bawaan node:sqlite, tanpa data pribadi pengunjung, dengan urutan nomor sendiri untuk tiap layanan per hari yang otomatis mulai dari awal setiap tengah malam sesuai zona waktu tempat usaha.",
-        "Merancang sistem agar berjalan dari satu PC di jaringan lokal tempat usaha, tanpa layanan cloud.",
-        "Menguji sistem dengan 94 tes unit dan integrasi di Vitest serta 4 tes end-to-end di Playwright, termasuk sinkronisasi antara pengunjung, loket, dan TV.",
+        "Full Stack Developer (Pembuatan tiket antrean di ponsel, layar TV dengan panggilan suara, panel loket, dan halaman admin).",
+        "Merancang sistem agar berjalan di jaringan lokal tempat usaha, tanpa layanan cloud dan tanpa data pribadi pengunjung.",
+        "Menguji sistem secara menyeluruh agar ponsel pengunjung, loket, dan TV tetap sejalan.",
       ],
     },
     stack: ["TypeScript", "React", "Hono", "SQLite"],
@@ -254,14 +252,14 @@ const PROJECTS: ProjectSource[] = [
     },
     contributions: {
       en: [
-        "Developed INTERSI-ITK as my thesis project using the Extreme Programming method, bringing the whole internship process into one system, from submissions and document checks to supervisor assignment, monitoring and grading.",
-        "Set up role-based access control (RBAC) for the four user roles: program coordinator, administrative staff, lecturers and students.",
-        "Designed a relational database schema that keeps submission data consistent.",
+        "Full Stack Developer (built submissions, document checks, supervisor assignment, monitoring and grading for internships).",
+        "Developed the system as my thesis project, using the Extreme Programming method.",
+        "Set up the right access for four roles: program coordinator, administrative staff, lecturers and students, on a system used by 40 to 60 students per period.",
       ],
       id: [
-        "Mengembangkan INTERSI-ITK sebagai proyek skripsi dengan metode Extreme Programming, menyatukan seluruh alur kerja praktik dalam satu sistem, mulai dari pengajuan dan verifikasi berkas hingga penentuan dosen pembimbing, monitoring, dan penilaian.",
-        "Menerapkan otorisasi berbasis peran (RBAC) untuk empat peran pengguna: koordinator prodi, tendik, dosen, dan mahasiswa.",
-        "Merancang skema basis data relasional yang menjaga konsistensi data pengajuan.",
+        "Full Stack Developer (Pembuatan pengajuan, verifikasi berkas, penentuan dosen pembimbing, monitoring, dan penilaian kerja praktik).",
+        "Mengembangkan sistem ini sebagai proyek skripsi dengan metode Extreme Programming.",
+        "Menyiapkan hak akses untuk empat peran, yaitu koordinator prodi, tendik, dosen, dan mahasiswa, pada sistem yang dipakai 40 sampai 60 mahasiswa per periode.",
       ],
     },
     stack: ["Laravel", "Vue", "Inertia.js", "MySQL"],
@@ -298,12 +296,14 @@ const PROJECTS: ProjectSource[] = [
     },
     contributions: {
       en: [
-        "Developed SI-RT as a full-stack Laravel and MySQL site that residents of RT 36 Wonorejo use to request cover letters, read announcements and see how the RT's cash is spent.",
-        "Designed an interface simple enough for residents of every age, with a layout that works on phones.",
+        "Full Stack Developer (built online cover-letter requests, the cash report, announcements and the night patrol schedule).",
+        "Designed a simple layout that residents of all ages can use easily and that works well on phones.",
+        "Delivered a service that is now used by 200+ residents of RT 36 Wonorejo.",
       ],
       id: [
-        "Mengembangkan SI-RT secara full stack dengan Laravel dan MySQL sebagai layanan mandiri bagi warga RT 36 Wonorejo untuk mengajukan surat pengantar, membaca pengumuman, dan melihat penggunaan kas RT.",
-        "Merancang antarmuka yang sederhana agar mudah digunakan warga dari berbagai usia, dengan tampilan yang nyaman di ponsel.",
+        "Full Stack Developer (Pembuatan pengajuan surat pengantar online, laporan kas, pengumuman, dan jadwal ronda malam).",
+        "Merancang tampilan yang sederhana agar mudah digunakan warga dari berbagai usia dan nyaman dibuka di ponsel.",
+        "Menghadirkan layanan yang kini digunakan oleh 200+ warga RT 36 Wonorejo.",
       ],
     },
     stack: ["Laravel", "PHP", "MySQL"],
@@ -340,12 +340,14 @@ const PROJECTS: ProjectSource[] = [
     },
     contributions: {
       en: [
-        "Built SITA-BPP as a full-stack prototype during my internship at Dinas Pemuda Olahraga dan Pariwisata Kota Balikpapan, from requirements analysis to deployment.",
-        "Integrated a map API for the interactive map with directions, and optimized the loading of high-resolution destination photos.",
+        "Full Stack Developer (built the destination directory, a map with directions, and admin pages to manage destinations and events).",
+        "Handled every stage as an intern at Dinas Pemuda Olahraga dan Pariwisata Kota Balikpapan, from requirements analysis to deployment.",
+        "Built the app on my own to help residents and tourists find places to visit in Balikpapan.",
       ],
       id: [
-        "Membangun SITA-BPP sebagai prototipe full-stack saat magang di Dinas Pemuda Olahraga dan Pariwisata Kota Balikpapan, mulai dari analisis kebutuhan hingga deployment.",
-        "Mengintegrasikan API peta untuk peta interaktif dengan petunjuk arah, serta mengoptimalkan pemuatan foto destinasi beresolusi tinggi.",
+        "Full Stack Developer (Pembuatan direktori destinasi wisata, peta dengan petunjuk arah, dan halaman admin untuk mengelola destinasi dan acara).",
+        "Menangani seluruh tahapan sebagai peserta magang di Dinas Pemuda Olahraga dan Pariwisata Kota Balikpapan, mulai dari analisis kebutuhan hingga deployment.",
+        "Membangun aplikasi secara mandiri untuk membantu warga dan wisatawan mencari tempat wisata di Balikpapan.",
       ],
     },
     stack: ["React", "Node.js", "Express", "MySQL"],
@@ -382,12 +384,14 @@ const PROJECTS: ProjectSource[] = [
     },
     contributions: {
       en: [
-        "Built the backend with Flask and the database with PostgreSQL, as part of the team's major assignment for the Cloud Computing course, which took about half a semester.",
-        "Worked on the backend side of booking, where guests choose check-in and check-out dates and the number of guests, then see which rooms are available.",
+        "Backend Developer (built the server side and the database for hotel room booking).",
+        "Worked on the backend side of the booking flow, where guests' dates and number of guests decide which rooms are available.",
+        "Worked in a team on the Cloud Computing major assignment.",
       ],
       id: [
-        "Membangun backend dengan Flask dan basis data dengan PostgreSQL sebagai bagian dari tugas besar tim untuk mata kuliah Cloud Computing, yang dikerjakan selama kurang lebih setengah semester.",
-        "Mengerjakan sisi backend untuk alur pemesanan, tempat tamu memilih tanggal check-in, check-out, dan jumlah tamu, lalu melihat kamar yang tersedia.",
+        "Backend Developer (Pembuatan sisi server dan basis data untuk pemesanan kamar hotel).",
+        "Mengerjakan sisi backend alur pemesanan, tempat tanggal dan jumlah tamu menentukan kamar yang tersedia.",
+        "Bekerja sama dalam tim pada tugas besar mata kuliah Cloud Computing.",
       ],
     },
     stack: ["React", "Vite", "Flask", "PostgreSQL"],

@@ -120,7 +120,6 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
         </ul>
 
         <h3>{t.contribution}</h3>
-        {project.role && <p className="modal-role">{project.role}</p>}
         <ul>
           {project.contributions.map((item) => (
             <li key={item}>{item}</li>
